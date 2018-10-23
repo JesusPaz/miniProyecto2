@@ -51,7 +51,7 @@ public class Tmio1_Buses_Logic {
 	
 	public boolean crearBus(Tmio1Bus bus) {
 		
-		// falta hacer todas las validaciones
+		
 		if(validarBus(bus)) {
 
 			em.getTransaction().begin();
@@ -68,7 +68,7 @@ public class Tmio1_Buses_Logic {
 	
 	public boolean actualizarBus(Tmio1Bus bus) {
 		
-		// falta hacer todas las validaciones
+		
 		if(validarBus(bus)) {
 
 			em.getTransaction().begin();
@@ -85,7 +85,7 @@ public class Tmio1_Buses_Logic {
 	
 	public boolean borrarBus(Tmio1Bus bus) {
 		
-		// falta hacer todas las validaciones
+		
 		if(validarBus(bus)) {
 
 			em.getTransaction().begin();
@@ -103,8 +103,8 @@ public class Tmio1_Buses_Logic {
 	public List<Tmio1Bus> buscarBusModelo(BigDecimal modelo) {
 		
 		
-		// falta hacer todas las validaciones
-		if(modelo!=null) {
+		
+		if(modelo!=null && modelo.compareTo(new BigDecimal(1000))>=0) {
 
 			em.getTransaction().begin();
 			List<Tmio1Bus> act= busesDAO.findByModel(em, modelo);
@@ -120,8 +120,8 @@ public class Tmio1_Buses_Logic {
 
 	public List<Tmio1Bus> buscarBusTipo(String tipo) {
 		
-		// falta hacer todas las validaciones
-		if(tipo!=null) {
+		
+		if(tipo!=null && (tipo.equals("P")||tipo.equals("A")||tipo.equals("T"))) {
 
 			em.getTransaction().begin();
 			List<Tmio1Bus> act= busesDAO.findByType(em, tipo);
@@ -137,8 +137,8 @@ public class Tmio1_Buses_Logic {
 
 	public List<Tmio1Bus> buscarBusCapacidad(BigDecimal capacidad) {
 		
-		// falta hacer todas las validaciones
-		if(capacidad!=null) {
+		
+		if(capacidad!=null && capacidad.compareTo(new BigDecimal(0))>0) {
 
 			em.getTransaction().begin();
 			List<Tmio1Bus> act= busesDAO.findByCapacity(em, capacidad);

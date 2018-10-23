@@ -94,7 +94,7 @@ public class Test_Tmio1_Buses_DAO {
 	@Transactional(readOnly=false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public void testUpdate() {
 
-			Tmio1Bus bus = busDAO.findById(em,-23);
+			Tmio1Bus bus = busDAO.findById(em,1);
 			assertNotNull("Code not found", bus);
 			bus.setCapacidad(new BigDecimal(1500));
 			busDAO.update(em, bus);
@@ -133,7 +133,7 @@ public class Test_Tmio1_Buses_DAO {
 	@Transactional(readOnly=false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public void testDelete() {
 
-			Tmio1Bus bus = busDAO.findById(em,-21);
+			Tmio1Bus bus = busDAO.findById(em,2);
 			assertNotNull("El bus NO existe", bus);
 			em.getTransaction().begin();
 			busDAO.delete(em, bus);
