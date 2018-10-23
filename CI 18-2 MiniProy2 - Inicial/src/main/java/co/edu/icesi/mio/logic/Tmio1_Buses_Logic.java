@@ -33,13 +33,13 @@ public class Tmio1_Buses_Logic {
 		// valida la placa
 		if(!bus.getPlaca().equals("") && bus.getPlaca()!=null && bus.getPlaca().length()==6) {
 			// valida la marca
-			if(bus.getMarca()!=null) {
+			if(!bus.getMarca().equals("") && bus.getMarca()!=null && bus.getMarca().length()>=3) {
 				// valida el modelo
-				if(bus.getModelo()!=null) {
+				if(bus.getModelo()!=null && bus.getModelo().compareTo(new BigDecimal(1000))>=0 ) {
 					// valida el tipo
-					if(bus.getTipo()!=null) {
+					if(bus.getTipo()!=null && (bus.getTipo().equals("P")||bus.getTipo().equals("A")||bus.getTipo().equals("T"))) {
 						// valida la capacidad
-						if(bus.getCapacidad()!=null) {
+						if(bus.getCapacidad()!=null && bus.getCapacidad().compareTo(new BigDecimal(0))>0) {
 							ret=true;	
 						}
 					}
