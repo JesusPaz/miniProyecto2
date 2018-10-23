@@ -28,6 +28,11 @@ public class Tmio1_Servicios_Logic {
 	
 		// SERVICIOS
 		
+//	 las llaves foráneas existan; la fecha inicio esté definida y sea menor o
+//	 igual que la fecha final. “La solución debe validar que al momento de crear un nuevo servicio,
+//	 tanto el bus como el conductor se encuentren disponibles, es decir que no se encuentren
+//	 asignados a otro servicio que coincida con las fechas, días y horarios establecidos.”
+	 
 		public boolean validarServicio(Tmio1Servicio servicio) {
 			return false;
 		}

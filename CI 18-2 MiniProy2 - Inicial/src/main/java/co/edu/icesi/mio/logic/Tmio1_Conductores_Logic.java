@@ -27,6 +27,12 @@ public class Tmio1_Conductores_Logic {
 	
 	// CONDUCTORES
 	
+	
+//	la cédula esté definida y sea numérica; el nombre esté definido y
+//	tenga por lo menos tres caracteres; el apellido esté definido y tenga por lo menos tres
+//	caracteres; la fecha de nacimiento esté definida y sea mayor de edad; la fecha de contratación
+//	esté definida y sea menor a la fecha actual.
+//	
 	public boolean validarConductor(Tmio1Conductore cond) {
 		return false;
 	}

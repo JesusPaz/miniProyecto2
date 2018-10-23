@@ -22,10 +22,31 @@ public class Tmio1_Buses_Logic {
     private Tmio1_Buses_DAO busesDAO;
 	
 	
-	
 
+//	 la placa esté definida y tenga seis caracteres; la marca esté definida y tenga
+//	 al menos tres caracteres; el modelo sea numérico de cuatro dígitos; el tipo sea P, A, o T; la
+//	 capacidad sea numérica mayor a cero.
+	
 	public boolean validarBus(Tmio1Bus bus) {
-		return false;
+		
+		boolean ret=false;
+		// valida la placa
+		if(!bus.getPlaca().equals("") && bus.getPlaca()!=null && bus.getPlaca().length()==6) {
+			// valida la marca
+			if(bus.getMarca()!=null) {
+				// valida el modelo
+				if(bus.getModelo()!=null) {
+					// valida el tipo
+					if(bus.getTipo()!=null) {
+						// valida la capacidad
+						if(bus.getCapacidad()!=null) {
+							ret=true;	
+						}
+					}
+				}	
+			}
+		}
+		return ret;
 	}
 	
 	public boolean crearBus(Tmio1Bus bus) {

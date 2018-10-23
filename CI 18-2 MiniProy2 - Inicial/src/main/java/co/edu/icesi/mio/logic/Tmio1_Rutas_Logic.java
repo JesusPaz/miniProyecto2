@@ -22,7 +22,10 @@ public class Tmio1_Rutas_Logic {
     private Tmio1_Rutas_DAO rutasDAO;
 	
 	
-	
+//	 el número de ruta tenga tres caracteres; el día inicio y fin sean numéricos
+//	 entre 1 y 7 y el inicio sea menor o igual al fin; la hora inicio y fin sean numéricos entre 1 y
+//	 1440 y el inicio sea menor o igual al fin; activa sea S o N.
+
 	public boolean validarRuta(Tmio1Ruta ruta) {
 		return false;
 	}
