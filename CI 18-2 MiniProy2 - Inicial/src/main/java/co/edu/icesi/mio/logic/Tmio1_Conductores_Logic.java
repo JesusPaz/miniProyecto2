@@ -85,7 +85,7 @@ public class Tmio1_Conductores_Logic {
 
 	public List<Tmio1Conductore> buscarConductorNombre(String nombre) {
 		// falta hacer todas las validaciones
-		if(!nombre.equals("")) {
+		if(!nombre.equals("") && nombre != null) {
 
 			em.getTransaction().begin();
 			List<Tmio1Conductore> act=conductorDAO.findByName(em, nombre);
@@ -101,7 +101,7 @@ public class Tmio1_Conductores_Logic {
 
 	public List<Tmio1Conductore> buscarConductorApellido(String apellido) {
 		// falta hacer todas las validaciones
-		if(!apellido.equals("")) {
+		if(!apellido.equals("") && apellido!=null) {
 
 			em.getTransaction().begin();
 			List<Tmio1Conductore> act=conductorDAO.findByLastName(em, apellido);
@@ -117,7 +117,7 @@ public class Tmio1_Conductores_Logic {
 
 	public Tmio1Conductore buscarConductorCedula(String cedula) {
 		// falta hacer todas las validaciones
-		if(!cedula.equals("")) {
+		if(!cedula.equals("") && cedula !=null) {
 
 			em.getTransaction().begin();
 			Tmio1Conductore act=conductorDAO.findByCedula(em, cedula);
