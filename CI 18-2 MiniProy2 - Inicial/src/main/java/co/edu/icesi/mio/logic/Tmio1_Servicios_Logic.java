@@ -34,7 +34,20 @@ public class Tmio1_Servicios_Logic {
 //	 asignados a otro servicio que coincida con las fechas, días y horarios establecidos.”
 	 
 		public boolean validarServicio(Tmio1Servicio servicio) {
-			return false;
+			//TODO
+			boolean ret =false;
+			// validar llaves foraneas
+			if(servicio.getTmio1Bus()!=null) {
+				//validar fecha inicio y fin
+				if(servicio.getTmio1Ruta().getDiaFin()!=null) {
+					// validar bus y conductor esten disponibles
+					if(servicio.getTmio1Bus()!=null) {
+						ret=true;
+					}
+				}
+				
+			}
+			return ret;
 		}
 	
 

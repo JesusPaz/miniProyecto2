@@ -27,7 +27,22 @@ public class Tmio1_Rutas_Logic {
 //	 1440 y el inicio sea menor o igual al fin; activa sea S o N.
 
 	public boolean validarRuta(Tmio1Ruta ruta) {
-		return false;
+		boolean ret = false;
+		//TODO
+		// validar numero ruta
+		if(ruta.getNumero()!=null) {
+			// validar dia inicio y fin
+			if(ruta.getDiaFin()!=null && ruta.getDiaInicio()!=null) {
+				//validar hora inicio y fin
+				if(ruta.getHoraInicio()!= null && ruta.getHoraFin()!=null) {
+					//validar activa
+					if(ruta.getActiva()!=null) {
+						ret=true;
+					}
+				}
+			}
+		}
+		return ret;
 	}
 	public boolean crearRuta(Tmio1Ruta ruta) {
 		

@@ -28,7 +28,9 @@ public class Tmio1_Buses_Logic {
 //	 capacidad sea numérica mayor a cero.
 	
 	public boolean validarBus(Tmio1Bus bus) {
-		
+		/*
+		 * Validación esta completa
+		 */
 		boolean ret=false;
 		// valida la placa
 		if(!bus.getPlaca().equals("") && bus.getPlaca()!=null && bus.getPlaca().length()==6) {

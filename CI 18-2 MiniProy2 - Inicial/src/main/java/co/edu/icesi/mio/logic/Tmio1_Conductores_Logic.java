@@ -34,7 +34,34 @@ public class Tmio1_Conductores_Logic {
 //	esté definida y sea menor a la fecha actual.
 //	
 	public boolean validarConductor(Tmio1Conductore cond) {
-		return false;
+		boolean ret = false;
+		try {
+			//TODO
+			// validar cedula
+			Integer.parseInt(cond.getCedula());
+			if(cond.getCedula()!=null && !cond.getCedula().equals("") ) {
+				//validar nombre
+				if(cond.getNombre()!=null && !cond.getNombre().equals("")) {
+					//validar apellido
+					if(cond.getApellidos()!=null) {
+						//validar fecha nacimiento
+						if(cond.getFechaNacimiento()!=null) {
+							//validar fecha contratacion
+							if(cond.getFechaContratacion()!=null) {
+								ret=true;
+							}
+						}
+					}
+					
+				}
+				
+			}
+			
+			return ret;
+		} catch (NumberFormatException e) {
+			return false;
+		}
+		
 	}
 	public boolean crearConductor(Tmio1Conductore cond) {
 		
