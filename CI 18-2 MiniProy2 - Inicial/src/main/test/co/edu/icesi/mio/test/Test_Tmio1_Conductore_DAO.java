@@ -46,6 +46,7 @@ public class Test_Tmio1_Conductore_DAO {
 	@Autowired
     private ITmio1_Conductores_DAO conductorDAO;
     
+	//preguntar si faltan los .begin y .commit de las transacciones
     @Test
 	@Transactional(readOnly=false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void saveTest() {

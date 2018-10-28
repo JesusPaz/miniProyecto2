@@ -6,11 +6,12 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import co.edu.icesi.mio.dao.Tmio1_Conductores_DAO;
 import co.edu.icesi.mio.model.Tmio1Conductore;
 
-public class Tmio1_Conductores_Logic {
+public class Tmio1_Conductores_Logic implements ICondutoresLogic {
 	
 
 	// atributos
@@ -63,6 +64,8 @@ public class Tmio1_Conductores_Logic {
 		}
 		
 	}
+	
+	@Transactional 
 	public boolean crearConductor(Tmio1Conductore cond) {
 		
 		// falta hacer todas las validaciones
