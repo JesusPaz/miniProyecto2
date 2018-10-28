@@ -83,6 +83,7 @@ public class Tmio1_Conductores_Logic implements ICondutoresLogic {
 		
 	}
 	
+	@Transactional
 	public boolean actualizarConductor(Tmio1Conductore cond) {
 		
 		
@@ -100,7 +101,7 @@ public class Tmio1_Conductores_Logic implements ICondutoresLogic {
 		
 	}
 	
-	
+	@Transactional
 	public boolean borrarConductor(Tmio1Conductore cond) {
 		
 		// falta hacer todas las validaciones
