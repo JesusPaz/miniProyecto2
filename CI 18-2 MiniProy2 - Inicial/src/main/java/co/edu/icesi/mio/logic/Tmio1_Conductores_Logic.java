@@ -3,20 +3,26 @@ package co.edu.icesi.mio.logic;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import co.edu.icesi.mio.dao.Tmio1_Conductores_DAO;
 import co.edu.icesi.mio.model.Tmio1Conductore;
 
+@Service
 public class Tmio1_Conductores_Logic implements ICondutoresLogic {
 	
 
+	EntityManagerFactory managerFactor = Persistence.createEntityManagerFactory("MiniProyectoComputacion");
+	
 	// atributos
 	@PersistenceContext
-    private EntityManager em;
+    private EntityManager em= managerFactor.createEntityManager();
 	
 
 	@Autowired
@@ -37,10 +43,12 @@ public class Tmio1_Conductores_Logic implements ICondutoresLogic {
 	public boolean validarConductor(Tmio1Conductore cond) {
 		boolean ret = false;
 		try {
+			
 			//TODO
 			// validar cedula
 			Integer.parseInt(cond.getCedula());
 			if(cond.getCedula()!=null && !cond.getCedula().equals("") ) {
+				
 				//validar nombre
 				if(cond.getNombre()!=null && !cond.getNombre().equals("")) {
 					//validar apellido
@@ -68,15 +76,19 @@ public class Tmio1_Conductores_Logic implements ICondutoresLogic {
 	@Transactional 
 	public boolean crearConductor(Tmio1Conductore cond) {
 		
+	if(cond!=null) {
 		// falta hacer todas las validaciones
-		if(validarConductor(cond)) {
+				if(validarConductor(cond)) {
 
-			em.getTransaction().begin();
-			conductorDAO.save(em, cond);
-			em.getTransaction().commit();
-			
-			return true;
+					em.getTransaction().begin();
+					conductorDAO.save(em, cond);
+					em.getTransaction().commit();
+					
+					
+				}
+				return true;
 		}else {
+			System.out.println(cond);
 			return false;	
 		}
 		

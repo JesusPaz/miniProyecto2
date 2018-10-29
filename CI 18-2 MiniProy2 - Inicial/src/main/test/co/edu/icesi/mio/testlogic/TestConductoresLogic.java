@@ -16,11 +16,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import co.edu.icesi.mio.dao.*;
 import co.edu.icesi.mio.dao.*;
 import co.edu.icesi.mio.logic.ICondutoresLogic;
+import co.edu.icesi.mio.logic.Tmio1_Conductores_Logic;
 import co.edu.icesi.mio.model.*;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("/applicationContext.xml")
-@Rollback(false)
+
 public class TestConductoresLogic {
 
 	@Autowired
@@ -32,8 +31,9 @@ public class TestConductoresLogic {
 	@Test
 	public void aTest() {
 
+		conductorLogic=new Tmio1_Conductores_Logic();
 		assertNotNull(conductorLogic);
-		assertNotNull(conductorDao);
+		
 		
 		Tmio1Conductore conductor= new Tmio1Conductore();
 		conductor.setCedula("01");
@@ -48,6 +48,46 @@ public class TestConductoresLogic {
 		conductor.setTmio1ServiciosSitios(new ArrayList<Tmio1ServiciosSitio>());
 		
 		assertTrue(conductorLogic.crearConductor(conductor));
+		
+	}
+	
+	
+	@Test
+	public void bTest() {
+
+		assertNotNull(conductorLogic);
+		assertNotNull(conductorDao);
+		
+		
+		
+	}
+	
+	
+	@Test
+	public void cTest() {
+
+		assertNotNull(conductorLogic);
+		assertNotNull(conductorDao);
+		
+	
+		
+	}
+	
+	
+	@Test
+	public void dTest() {
+
+		assertNotNull(conductorLogic);
+		assertNotNull(conductorDao);
+		
+		
+	}
+	
+	
+	@Test
+	public void eTest() {
+
+		
 		
 	}
 }
