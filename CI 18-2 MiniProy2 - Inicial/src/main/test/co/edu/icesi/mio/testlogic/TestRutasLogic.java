@@ -6,6 +6,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -21,6 +22,7 @@ public class TestRutasLogic {
 	@Autowired
 	private IRutasLogic rutasLogic;
 
+	@Before
 	public void setupEscenario1() {
 
 		rutasLogic=new Tmio1_Rutas_Logic();
@@ -28,7 +30,7 @@ public class TestRutasLogic {
 	
 	@Test
 	public void crearTest() {
-		setupEscenario1();
+		
 		
 		assertNotNull(rutasLogic);
 		
@@ -91,7 +93,7 @@ public class TestRutasLogic {
 	
 	@Test
 	public void buscarPorRangoDiasTest() {
-		setupEscenario1();
+		
 		
 		assertNotNull(rutasLogic);
 		
@@ -105,7 +107,7 @@ public class TestRutasLogic {
 	
 	@Test
 	public void actualizarTest() {
-		setupEscenario1();
+		
 		
 		assertNotNull(rutasLogic);
 	
@@ -121,7 +123,7 @@ public class TestRutasLogic {
 	
 	@Test
 	public void borrarTest() {
-		setupEscenario1();
+		
 		
 		assertNotNull(rutasLogic);
 		
@@ -136,7 +138,7 @@ public class TestRutasLogic {
 	
 	@Test
 	public void buscarPorRangoDias2Test() {
-		setupEscenario1();
+		
 		
 		assertNotNull(rutasLogic);
 		

@@ -12,9 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import co.edu.icesi.mio.dao.Tmio1_Conductores_DAO;
-import co.edu.icesi.mio.dao.Tmio1_Servicios_DAO;
-import co.edu.icesi.mio.model.Tmio1Conductore;
+import co.edu.icesi.mio.dao.*;
+import co.edu.icesi.mio.model.Tmio1Bus;
+import co.edu.icesi.mio.model.*;
 import co.edu.icesi.mio.model.Tmio1Servicio;
 
 @Service
@@ -28,10 +28,36 @@ EntityManagerFactory managerFactor = Persistence.createEntityManagerFactory("Min
     private EntityManager em= managerFactor.createEntityManager();
 	
 	@Autowired
-    private Tmio1_Servicios_DAO serviciosDAO;
-	
+    private ITmio1_Servicios_DAO serviciosDAO = new Tmio1_Servicios_DAO();
 	
 	//METODOS
+	
+	
+	//////
+	@Autowired
+	private ITmio1_Buses_DAO busesDao;
+	@Autowired
+	private ITmio1_Rutas_DAO rutasDao;
+	@Autowired
+	private ITmio1_Conductores_DAO conductoresDao;
+	
+	public Tmio1Bus getBus(int id) {
+		busesDao=new Tmio1_Buses_DAO();
+		return busesDao.findById(em, id);
+	}
+	
+	public Tmio1Conductore getConductor(String cedula) {
+		conductoresDao = new Tmio1_Conductores_DAO();
+		return conductoresDao.findByCedula(em, cedula);
+	}
+	
+	public Tmio1Ruta getRuta(int id) {
+		rutasDao= new Tmio1_Rutas_DAO();
+		return rutasDao.findById(em, id);
+	}
+	
+	///////
+	
 	
 		// SERVICIOS
 		
@@ -127,6 +153,10 @@ EntityManagerFactory managerFactor = Persistence.createEntityManagerFactory("Min
 			}
 			
 		}
+		
+
+		
+		
 		
 		
 		

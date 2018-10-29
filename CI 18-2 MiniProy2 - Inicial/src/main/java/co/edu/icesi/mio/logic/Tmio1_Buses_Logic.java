@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import co.edu.icesi.mio.dao.ITmio1_Buses_DAO;
 import co.edu.icesi.mio.dao.Tmio1_Buses_DAO;
 import co.edu.icesi.mio.model.Tmio1Bus;
 
@@ -26,7 +27,7 @@ EntityManagerFactory managerFactor = Persistence.createEntityManagerFactory("Min
     private EntityManager em= managerFactor.createEntityManager();
 	
 	@Autowired
-    private Tmio1_Buses_DAO busesDAO;
+    private ITmio1_Buses_DAO busesDAO = new Tmio1_Buses_DAO();
 	
 	
 
@@ -55,6 +56,7 @@ EntityManagerFactory managerFactor = Persistence.createEntityManagerFactory("Min
 				}	
 			}
 		}
+		System.out.println(ret);
 		return ret;
 	}
 	
@@ -72,7 +74,6 @@ EntityManagerFactory managerFactor = Persistence.createEntityManagerFactory("Min
 		}else {
 			return false;	
 		}
-		
 		
 	}
 	
