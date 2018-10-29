@@ -25,9 +25,10 @@ import co.edu.icesi.mio.model.*;
 
 public class TestConductoresLogic {
 
-	@Autowired
-	private ICondutoresLogic conductorLogic=new Tmio1_Conductores_Logic();
 
+	private ICondutoresLogic conductorLogic;
+
+	@Before
 	public void setupEscenario1() {
 
 		conductorLogic=new Tmio1_Conductores_Logic();
@@ -38,7 +39,7 @@ public class TestConductoresLogic {
 	@Before
 	public void crearTest() {
 
-		setupEscenario1();
+//		setupEscenario1();
 		assertNotNull(conductorLogic);
 		
 		
