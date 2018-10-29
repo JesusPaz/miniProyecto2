@@ -10,6 +10,7 @@ import javax.persistence.PersistenceContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import co.edu.icesi.mio.dao.Tmio1_Conductores_DAO;
 import co.edu.icesi.mio.dao.Tmio1_Servicios_DAO;
@@ -56,7 +57,7 @@ EntityManagerFactory managerFactor = Persistence.createEntityManagerFactory("Min
 			return ret;
 		}
 	
-
+		@Transactional
 		public boolean crearServicio(Tmio1Servicio servicio) {
 			
 			// falta hacer todas las validaciones
@@ -74,7 +75,7 @@ EntityManagerFactory managerFactor = Persistence.createEntityManagerFactory("Min
 			
 		}
 		
-		
+		@Transactional
 		public boolean actualizarServicio(Tmio1Servicio servicio) {
 			
 			// falta hacer todas las validaciones
@@ -92,7 +93,7 @@ EntityManagerFactory managerFactor = Persistence.createEntityManagerFactory("Min
 			
 		}
 		
-		
+		@Transactional
 		public boolean borrarServicio(Tmio1Servicio servicio) {
 			
 			// falta hacer todas las validaciones
@@ -111,7 +112,7 @@ EntityManagerFactory managerFactor = Persistence.createEntityManagerFactory("Min
 		}
 		
 		
-
+		@Transactional
 		public List<Tmio1Servicio> buscarServicioRangoFechas(Calendar fechaInicio, Calendar fechaFin ) {
 			// falta hacer todas las validaciones
 			if(fechaInicio!=null && fechaFin!=null) {

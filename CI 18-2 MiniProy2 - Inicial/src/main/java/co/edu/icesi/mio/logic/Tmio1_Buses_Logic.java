@@ -76,6 +76,7 @@ EntityManagerFactory managerFactor = Persistence.createEntityManagerFactory("Min
 		
 	}
 	
+	@Transactional
 	public boolean actualizarBus(Tmio1Bus bus) {
 		
 		
@@ -92,7 +93,7 @@ EntityManagerFactory managerFactor = Persistence.createEntityManagerFactory("Min
 
 	}
 	
-	
+	@Transactional
 	public boolean borrarBus(Tmio1Bus bus) {
 		
 		
@@ -109,7 +110,7 @@ EntityManagerFactory managerFactor = Persistence.createEntityManagerFactory("Min
 
 	}
 	
-	
+	@Transactional
 	public List<Tmio1Bus> buscarBusModelo(BigDecimal modelo) {
 		
 		
@@ -127,7 +128,7 @@ EntityManagerFactory managerFactor = Persistence.createEntityManagerFactory("Min
 		
 	}
 	
-
+	@Transactional
 	public List<Tmio1Bus> buscarBusTipo(String tipo) {
 		
 		
@@ -144,7 +145,7 @@ EntityManagerFactory managerFactor = Persistence.createEntityManagerFactory("Min
 		
 	}
 	
-
+	@Transactional
 	public List<Tmio1Bus> buscarBusCapacidad(BigDecimal capacidad) {
 		
 		
