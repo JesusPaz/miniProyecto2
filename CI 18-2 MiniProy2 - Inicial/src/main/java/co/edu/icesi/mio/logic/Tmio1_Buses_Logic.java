@@ -16,7 +16,7 @@ import co.edu.icesi.mio.dao.Tmio1_Buses_DAO;
 import co.edu.icesi.mio.model.Tmio1Bus;
 
 @Service
-public class Tmio1_Buses_Logic {
+public class Tmio1_Buses_Logic implements IBusesLogic {
 	
 
 EntityManagerFactory managerFactor = Persistence.createEntityManagerFactory("MiniProyectoComputacion");

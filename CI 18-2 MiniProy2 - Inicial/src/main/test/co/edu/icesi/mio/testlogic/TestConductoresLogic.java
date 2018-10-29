@@ -33,7 +33,7 @@ public class TestConductoresLogic {
 	
 	
 	@Test
-	public void saveTest() {
+	public void crearTest() {
 
 		setupEscenario1();
 		assertNotNull(conductorLogic);

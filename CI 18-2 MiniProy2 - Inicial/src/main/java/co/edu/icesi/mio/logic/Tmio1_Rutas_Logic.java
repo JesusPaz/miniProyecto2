@@ -12,21 +12,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import co.edu.icesi.mio.dao.Tmio1_Rutas_DAO;
+import co.edu.icesi.mio.dao.*;
+import co.edu.icesi.mio.dao.*;
 import co.edu.icesi.mio.model.Tmio1Ruta;
 
 @Service
 public class Tmio1_Rutas_Logic implements IRutasLogic {
 	
 
-EntityManagerFactory managerFactor = Persistence.createEntityManagerFactory("MiniProyectoComputacion");
+	EntityManagerFactory managerFactor = Persistence.createEntityManagerFactory("MiniProyectoComputacion");
 	
 	// atributos
 	@PersistenceContext
     private EntityManager em= managerFactor.createEntityManager();
 	
 	@Autowired
-    private Tmio1_Rutas_DAO rutasDAO;
+    private ITmio1_Rutas_DAO rutasDAO = new Tmio1_Rutas_DAO();
 	
 	
 //	 el número de ruta tenga tres caracteres; el día inicio y fin sean numéricos
@@ -56,6 +57,7 @@ EntityManagerFactory managerFactor = Persistence.createEntityManagerFactory("Min
 	public boolean crearRuta(Tmio1Ruta ruta) {
 		
 		// falta hacer todas las validaciones
+		
 		if(validarRuta(ruta)) {
 
 			em.getTransaction().begin();

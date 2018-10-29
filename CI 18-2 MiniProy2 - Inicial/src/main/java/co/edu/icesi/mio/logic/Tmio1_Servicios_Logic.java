@@ -18,7 +18,7 @@ import co.edu.icesi.mio.model.Tmio1Conductore;
 import co.edu.icesi.mio.model.Tmio1Servicio;
 
 @Service
-public class Tmio1_Servicios_Logic {
+public class Tmio1_Servicios_Logic implements IServiciosLogic{
 	
 
 EntityManagerFactory managerFactor = Persistence.createEntityManagerFactory("MiniProyectoComputacion");
