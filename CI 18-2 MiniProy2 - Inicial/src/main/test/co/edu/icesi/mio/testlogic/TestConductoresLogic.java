@@ -24,12 +24,9 @@ public class TestConductoresLogic {
 
 	@Autowired
 	private ICondutoresLogic conductorLogic;
-	
-	
-	ITmio1_Conductores_DAO conductorDao;
-	
+
 	@Test
-	public void aTest() {
+	public void saveTest() {
 
 		conductorLogic=new Tmio1_Conductores_Logic();
 		assertNotNull(conductorLogic);
@@ -39,15 +36,26 @@ public class TestConductoresLogic {
 		conductor.setCedula("01");
 		conductor.setNombre("Diana");
 		conductor.setApellidos("Torres");
-		Calendar d = new GregorianCalendar(2018,01,20);
+		Calendar d = new GregorianCalendar(2018,01,10);
 		conductor.setFechaContratacion(d.getTime());
-		Calendar d1 = new GregorianCalendar(1998,01,20);
+		Calendar d1 = new GregorianCalendar(1997,07,22);
 		conductor.setFechaNacimiento(d1.getTime());
-		
 		conductor.setTmio1Servicios(new ArrayList<Tmio1Servicio>());
 		conductor.setTmio1ServiciosSitios(new ArrayList<Tmio1ServiciosSitio>());
 		
+		Tmio1Conductore conductor2= new Tmio1Conductore();
+		conductor2.setCedula("02");
+		conductor2.setNombre("Jesús");
+		conductor2.setApellidos("Pazi");
+		Calendar d2 = new GregorianCalendar(2017,07,03);
+		conductor2.setFechaContratacion(d2.getTime());
+		Calendar d3 = new GregorianCalendar(1998,05,20);
+		conductor2.setFechaNacimiento(d3.getTime());
+		conductor2.setTmio1Servicios(new ArrayList<Tmio1Servicio>());
+		conductor2.setTmio1ServiciosSitios(new ArrayList<Tmio1ServiciosSitio>());
+		
 		assertTrue(conductorLogic.crearConductor(conductor));
+		assertTrue(conductorLogic.crearConductor(conductor2));
 		
 	}
 	
@@ -56,7 +64,7 @@ public class TestConductoresLogic {
 	public void bTest() {
 
 		assertNotNull(conductorLogic);
-		assertNotNull(conductorDao);
+		
 		
 		
 		
@@ -67,7 +75,7 @@ public class TestConductoresLogic {
 	public void cTest() {
 
 		assertNotNull(conductorLogic);
-		assertNotNull(conductorDao);
+		
 		
 	
 		
@@ -78,7 +86,7 @@ public class TestConductoresLogic {
 	public void dTest() {
 
 		assertNotNull(conductorLogic);
-		assertNotNull(conductorDao);
+		
 		
 		
 	}

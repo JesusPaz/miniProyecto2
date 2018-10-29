@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import co.edu.icesi.mio.dao.ITmio1_Conductores_DAO;
 import co.edu.icesi.mio.dao.Tmio1_Conductores_DAO;
 import co.edu.icesi.mio.model.Tmio1Conductore;
 
@@ -26,8 +27,8 @@ public class Tmio1_Conductores_Logic implements ICondutoresLogic {
 	
 
 	@Autowired
-    private Tmio1_Conductores_DAO conductorDAO;
-	
+    private ITmio1_Conductores_DAO conductorDAO  =new Tmio1_Conductores_DAO();
+	//preguntar pq cuando se quita el new falla la instanciacion
 	
 	
 	//METODOS
@@ -68,6 +69,7 @@ public class Tmio1_Conductores_Logic implements ICondutoresLogic {
 			
 			return ret;
 		} catch (NumberFormatException e) {
+			
 			return false;
 		}
 		
@@ -75,8 +77,10 @@ public class Tmio1_Conductores_Logic implements ICondutoresLogic {
 	
 	@Transactional 
 	public boolean crearConductor(Tmio1Conductore cond) {
+//		System.out.println(cond.getCedula() +" "+cond.getNombre() +" "+cond.getApellidos()+" "+cond.getTmio1Servicios());
+	
 		
-	if(cond!=null) {
+		if(cond!=null) {
 		// falta hacer todas las validaciones
 				if(validarConductor(cond)) {
 
@@ -88,7 +92,7 @@ public class Tmio1_Conductores_Logic implements ICondutoresLogic {
 				}
 				return true;
 		}else {
-			System.out.println(cond);
+			
 			return false;	
 		}
 		
