@@ -4,21 +4,27 @@ import java.util.Calendar;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import co.edu.icesi.mio.dao.Tmio1_Conductores_DAO;
 import co.edu.icesi.mio.dao.Tmio1_Servicios_DAO;
 import co.edu.icesi.mio.model.Tmio1Conductore;
 import co.edu.icesi.mio.model.Tmio1Servicio;
 
+@Service
 public class Tmio1_Servicios_Logic {
 	
 
+EntityManagerFactory managerFactor = Persistence.createEntityManagerFactory("MiniProyectoComputacion");
+	
 	// atributos
 	@PersistenceContext
-    private EntityManager em;
+    private EntityManager em= managerFactor.createEntityManager();
 	
 	@Autowired
     private Tmio1_Servicios_DAO serviciosDAO;

@@ -4,20 +4,26 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import co.edu.icesi.mio.dao.Tmio1_Buses_DAO;
 import co.edu.icesi.mio.model.Tmio1Bus;
 
+@Service
 public class Tmio1_Buses_Logic {
 	
 
+EntityManagerFactory managerFactor = Persistence.createEntityManagerFactory("MiniProyectoComputacion");
+	
 	// atributos
 	@PersistenceContext
-    private EntityManager em;
+    private EntityManager em= managerFactor.createEntityManager();
 	
 	@Autowired
     private Tmio1_Buses_DAO busesDAO;
