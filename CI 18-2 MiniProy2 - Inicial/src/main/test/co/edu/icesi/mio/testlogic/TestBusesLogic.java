@@ -313,15 +313,103 @@ public class TestBusesLogic {
 	public void actualizarTest() {
 		
 	}
+	
+	/*
+	 * prueba con datos de la prueba crearTest, funciona bien
+	 */
 //	@Test
 //	@After
-	public void borrarTest() {
+	public void borrarTest1() {
 
 		assertTrue(busesLogic.borrarBus(busesLogic.buscarPlaca("KGZ310")));
 		assertTrue(busesLogic.borrarBus(busesLogic.buscarPlaca("IZU339")));
 		assertTrue(busesLogic.borrarBus(busesLogic.buscarPlaca("DMS444")));
 		assertTrue(busesLogic.borrarBus(busesLogic.buscarPlaca("MSX233")));
 	}
+	
+
+	/*
+	 * Prueba con placa = "" por lo tanto funciona mal
+	 */
+	@Test 
+	public void borrarTest2() {
+		
+		Tmio1Bus bus = new Tmio1Bus();
+		
+		bus.setCapacidad(new BigDecimal(2000));
+		bus.setMarca("Renault");
+		bus.setModelo(new BigDecimal(2015));
+		bus.setPlaca("");
+		bus.setTipo("T");
+		bus.setTmio1Servicios(new ArrayList<Tmio1Servicio>());
+		bus.setTmio1ServiciosSitios(new ArrayList<Tmio1ServiciosSitio>());
+		
+	
+		assertFalse(busesLogic.borrarBus(bus));
+	}
+	
+	/*
+	 * Prueba con placa = "ADS48552" por lo tanto funciona mal
+	 */
+	@Test 
+	public void borrarTest3() {
+		
+		Tmio1Bus bus = new Tmio1Bus();
+		
+		bus.setCapacidad(new BigDecimal(2000));
+		bus.setMarca("Renault");
+		bus.setModelo(new BigDecimal(2015));
+		bus.setPlaca("ADS48552");
+		bus.setTipo("T");
+		bus.setTmio1Servicios(new ArrayList<Tmio1Servicio>());
+		bus.setTmio1ServiciosSitios(new ArrayList<Tmio1ServiciosSitio>());
+		
+	
+		assertFalse(busesLogic.borrarBus(bus));
+	}
+	
+	/*
+	 * Prueba con modelo = -20 por lo tanto funciona mal
+	 */
+	
+	@Test 
+	public void borrarTest4() {
+		
+		Tmio1Bus bus = new Tmio1Bus();
+		
+		bus.setCapacidad(new BigDecimal(2000));
+		bus.setMarca("Renault");
+		bus.setModelo(new BigDecimal(-20));
+		bus.setPlaca("KGZ310");
+		bus.setTipo("T");
+		bus.setTmio1Servicios(new ArrayList<Tmio1Servicio>());
+		bus.setTmio1ServiciosSitios(new ArrayList<Tmio1ServiciosSitio>());
+		
+	
+		assertFalse(busesLogic.borrarBus(bus));
+	}
+	
+	/*
+	 * Prueba con marca = "IP" por lo tanto funciona mal
+	 */
+	@Test 
+	public void borrarTest5() {
+		
+		Tmio1Bus bus = new Tmio1Bus();
+		
+		bus.setCapacidad(new BigDecimal(2000));
+		bus.setMarca("IP");
+		bus.setModelo(new BigDecimal(2015));
+		bus.setPlaca("KGZ310");
+		bus.setTipo("T");
+		bus.setTmio1Servicios(new ArrayList<Tmio1Servicio>());
+		bus.setTmio1ServiciosSitios(new ArrayList<Tmio1ServiciosSitio>());
+		
+	
+		assertFalse(busesLogic.borrarBus(bus));
+	}
+	
+	
 	
 
 }
