@@ -20,7 +20,7 @@ import co.edu.icesi.mio.model.Tmio1Bus;
 public class Tmio1_Buses_Logic implements IBusesLogic {
 	
 
-EntityManagerFactory managerFactor = Persistence.createEntityManagerFactory("MiniProyectoComputacion");
+	EntityManagerFactory managerFactor = Persistence.createEntityManagerFactory("MiniProyectoComputacion");
 	
 	// atributos
 	@PersistenceContext
@@ -75,6 +75,21 @@ EntityManagerFactory managerFactor = Persistence.createEntityManagerFactory("Min
 			return false;	
 		}
 		
+	}
+	
+	@Transactional
+	public Tmio1Bus buscarPlaca(String placa) {
+		
+		if(placa!=null&&!placa.equals("")) {
+
+			em.getTransaction().begin();
+			Tmio1Bus act=busesDAO.findByPlaca(em, placa);
+			em.getTransaction().commit();
+			
+			return act;
+		}else {
+			return null;	
+		}
 	}
 	
 	@Transactional

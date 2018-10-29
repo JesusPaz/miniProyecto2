@@ -13,4 +13,5 @@ public interface IBusesLogic {
 	public List<Tmio1Bus> buscarBusModelo(BigDecimal modelo);
 	public List<Tmio1Bus> buscarBusTipo(String tipo);
 	public List<Tmio1Bus> buscarBusCapacidad(BigDecimal capacidad);
+	public Tmio1Bus buscarPlaca(String placa);
 }

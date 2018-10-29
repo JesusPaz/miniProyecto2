@@ -21,6 +21,12 @@ public class Tmio1_Buses_DAO implements ITmio1_Buses_DAO{
 		String jpql = "Select b from Tmio1Bus b where b.modelo="+ model;
 		return 	em.createQuery(jpql).getResultList();
 	}
+	
+	@Override
+	public Tmio1Bus findByPlaca(EntityManager em, String placa) {
+		String jpql = "Select b from Tmio1Bus b where b.placa="+ placa;
+		return 	 (Tmio1Bus) em.createQuery(jpql).getSingleResult();
+	}
 
 	@Override
 	public List<Tmio1Bus>findByType(EntityManager em, String type) {
