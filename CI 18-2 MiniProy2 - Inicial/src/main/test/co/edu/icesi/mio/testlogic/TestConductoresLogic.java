@@ -7,6 +7,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -34,9 +35,10 @@ public class TestConductoresLogic {
 	
 	
 	@Test
+	@Before
 	public void crearTest() {
 
-//		setupEscenario1();
+		setupEscenario1();
 		assertNotNull(conductorLogic);
 		
 		
@@ -173,20 +175,28 @@ public class TestConductoresLogic {
 	}
 
 	
-	
-//	public void borrarTest() {
+	@Test
+	@After
+	public void borrarTest() {
 //		setupEscenario1();
-//
-//		
-//		assertNotNull(conductorLogic);
+
+		
+		assertNotNull(conductorLogic);
 //		
 //		assertTrue(conductorLogic.borrarConductor(conductorLogic.buscarConductorCedula("15")));
 //		assertNull(conductorLogic.buscarConductorCedula("15"));
 //		assertTrue(conductorLogic.borrarConductor(conductorLogic.buscarConductorCedula("123")));
 //		assertNull(conductorLogic.buscarConductorCedula("123"));
-//		
-//		
-//	}
+		
+
+		assertTrue(conductorLogic.borrarConductor(conductorLogic.buscarConductorCedula("01")));
+		assertTrue(conductorLogic.borrarConductor(conductorLogic.buscarConductorCedula("02")));
+		assertTrue(conductorLogic.borrarConductor(conductorLogic.buscarConductorCedula("06")));
+		assertTrue(conductorLogic.borrarConductor(conductorLogic.buscarConductorCedula("10")));
+		assertTrue(conductorLogic.borrarConductor(conductorLogic.buscarConductorCedula("123")));
+		assertTrue(conductorLogic.borrarConductor(conductorLogic.buscarConductorCedula("15")));
+				
+	}
 	
 //	@Test
 //	public void actualizarTest() {

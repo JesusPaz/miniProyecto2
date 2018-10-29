@@ -47,7 +47,7 @@ public class Tmio1_Conductores_Logic implements ICondutoresLogic {
 			
 			//TODO
 			// validar cedula
-			Integer.parseInt(cond.getCedula());
+			//Integer.parseInt(cond.getCedula());
 			if(cond.getCedula()!=null && !cond.getCedula().equals("") ) {
 				
 				//validar nombre
