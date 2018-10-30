@@ -10,6 +10,8 @@ import javax.persistence.PersistenceContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.test.annotation.Rollback;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
 import co.edu.icesi.mio.dao.*;
@@ -17,17 +19,20 @@ import co.edu.icesi.mio.dao.*;
 import co.edu.icesi.mio.model.Tmio1Ruta;
 
 @Service
+@ContextConfiguration("/applicationContext.xml")
+@Rollback(false)
 public class Tmio1_Rutas_Logic implements IRutasLogic {
 	
 
-	EntityManagerFactory managerFactor = Persistence.createEntityManagerFactory("MiniProyectoComputacion");
+//	EntityManagerFactory managerFactor = Persistence.createEntityManagerFactory("MiniProyectoComputacion");
 	
 	// atributos
 	@PersistenceContext
-    private EntityManager em= managerFactor.createEntityManager();
+	 private EntityManager em;
+//    private EntityManager em= managerFactor.createEntityManager();
 	
 	@Autowired
-    private ITmio1_Rutas_DAO rutasDAO = new Tmio1_Rutas_DAO();
+    private ITmio1_Rutas_DAO rutasDAO ;
 	
 	
 //	 el número de ruta tenga tres caracteres; el día inicio y fin sean numéricos
@@ -35,22 +40,34 @@ public class Tmio1_Rutas_Logic implements IRutasLogic {
 //	 1440 y el inicio sea menor o igual al fin; activa sea S o N.
 
 	public boolean validarRuta(Tmio1Ruta ruta) {
-		boolean ret = false;
-		//TODO
-		// validar numero ruta
-		if(ruta.getNumero()!=null) {
-			// validar dia inicio y fin
-			if(ruta.getDiaFin()!=null && ruta.getDiaInicio()!=null) {
-				//validar hora inicio y fin
-				if(ruta.getHoraInicio()!= null && ruta.getHoraFin()!=null) {
-					//validar activa
-					if(ruta.getActiva()!=null) {
-						ret=true;
+		
+		try {
+			boolean ret = false;
+			//TODO
+			
+			ruta.getDiaFin().intValueExact();
+			ruta.getDiaInicio().intValueExact();
+			
+			// validar numero ruta
+			if(ruta.getNumero()!=null && !ruta.getNumero().equals("") && ruta.getNumero().length()==3) {
+				// validar dia inicio y fin
+				if(ruta.getDiaFin()!=null && ruta.getDiaInicio()!=null&& ruta.getDiaFin().compareTo(new BigDecimal(1))>=0 &&
+						ruta.getDiaFin().compareTo(new BigDecimal(7))<=0 && ruta.getDiaInicio().compareTo(new BigDecimal(1))>=0 &&
+						ruta.getDiaInicio().compareTo(new BigDecimal(7))<=0 && ruta.getDiaInicio().compareTo(ruta.getDiaFin())<=0) {
+					//validar hora inicio y fin
+					if(ruta.getHoraInicio()!= null && ruta.getHoraFin()!=null) {
+						//validar activa
+						if(ruta.getActiva()!=null&& (ruta.getActiva().equals("S")||ruta.getActiva().equals("N"))) {
+							ret=true;
+						}
 					}
 				}
 			}
+			return ret;
+		} catch (ArithmeticException e) {
+			return false;
 		}
-		return ret;
+		
 	}
 	
 	@Transactional

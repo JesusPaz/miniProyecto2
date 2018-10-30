@@ -10,6 +10,9 @@ import javax.persistence.PersistenceContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.test.annotation.Rollback;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import co.edu.icesi.mio.dao.*;
@@ -17,18 +20,23 @@ import co.edu.icesi.mio.model.Tmio1Bus;
 import co.edu.icesi.mio.model.*;
 import co.edu.icesi.mio.model.Tmio1Servicio;
 
+
 @Service
+@ContextConfiguration("/applicationContext.xml")
+@Rollback(false)
 public class Tmio1_Servicios_Logic implements IServiciosLogic{
 	
 
-EntityManagerFactory managerFactor = Persistence.createEntityManagerFactory("MiniProyectoComputacion");
+//EntityManagerFactory managerFactor = Persistence.createEntityManagerFactory("MiniProyectoComputacion");
 	
 	// atributos
 	@PersistenceContext
-    private EntityManager em= managerFactor.createEntityManager();
+	private EntityManager em;
+	
+//    private EntityManager em= managerFactor.createEntityManager();
 	
 	@Autowired
-    private ITmio1_Servicios_DAO serviciosDAO = new Tmio1_Servicios_DAO();
+    private ITmio1_Servicios_DAO serviciosDAO ;
 	
 	//METODOS
 	
@@ -41,16 +49,18 @@ EntityManagerFactory managerFactor = Persistence.createEntityManagerFactory("Min
 	@Autowired
 	private ITmio1_Conductores_DAO conductoresDao;
 	
+
+	
 	public Tmio1Bus getBus(int id) {
 		busesDao=new Tmio1_Buses_DAO();
 		return busesDao.findById(em, id);
 	}
-	
+
 	public Tmio1Conductore getConductor(String cedula) {
 		conductoresDao = new Tmio1_Conductores_DAO();
 		return conductoresDao.findByCedula(em, cedula);
 	}
-	
+
 	public Tmio1Ruta getRuta(int id) {
 		rutasDao= new Tmio1_Rutas_DAO();
 		return rutasDao.findById(em, id);
@@ -83,7 +93,8 @@ EntityManagerFactory managerFactor = Persistence.createEntityManagerFactory("Min
 			return ret;
 		}
 	
-		@Transactional
+
+		@Transactional(readOnly=false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 		public boolean crearServicio(Tmio1Servicio servicio) {
 			
 			// falta hacer todas las validaciones
@@ -101,7 +112,8 @@ EntityManagerFactory managerFactor = Persistence.createEntityManagerFactory("Min
 			
 		}
 		
-		@Transactional
+
+		@Transactional(readOnly=false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 		public boolean actualizarServicio(Tmio1Servicio servicio) {
 			
 			// falta hacer todas las validaciones
@@ -119,7 +131,8 @@ EntityManagerFactory managerFactor = Persistence.createEntityManagerFactory("Min
 			
 		}
 		
-		@Transactional
+
+		@Transactional(readOnly=false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 		public boolean borrarServicio(Tmio1Servicio servicio) {
 			
 			// falta hacer todas las validaciones
@@ -138,7 +151,8 @@ EntityManagerFactory managerFactor = Persistence.createEntityManagerFactory("Min
 		}
 		
 		
-		@Transactional
+
+		@Transactional(readOnly=false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 		public List<Tmio1Servicio> buscarServicioRangoFechas(Calendar fechaInicio, Calendar fechaFin ) {
 			// falta hacer todas las validaciones
 			if(fechaInicio!=null && fechaFin!=null) {

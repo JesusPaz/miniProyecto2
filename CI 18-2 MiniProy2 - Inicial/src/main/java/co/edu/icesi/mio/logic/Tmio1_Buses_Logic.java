@@ -20,7 +20,7 @@ import co.edu.icesi.mio.dao.Tmio1_Buses_DAO;
 import co.edu.icesi.mio.model.Tmio1Bus;
 
 
-//@Service
+@Service
 @ContextConfiguration("/applicationContext.xml")
 @Rollback(false)
 public class Tmio1_Buses_Logic implements IBusesLogic {
