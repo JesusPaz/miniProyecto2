@@ -229,7 +229,7 @@ public class TestConductoresLogic {
 	
 	/**
 	 * Funciona, no deja crear un conductor con un nombre y apellido 
-	 * de menos de tres caracteres. (VER VALIDACIONES)
+	 * de menos de tres caracteres. 
 	 */
 	@Test
 	public void crearTest5() {
