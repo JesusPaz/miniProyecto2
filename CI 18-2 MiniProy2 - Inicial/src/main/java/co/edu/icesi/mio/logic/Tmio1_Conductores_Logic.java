@@ -46,13 +46,16 @@ public class Tmio1_Conductores_Logic implements ICondutoresLogic {
 		try {
 	
 			// validar cedula
-			Integer.parseInt(cond.getCedula());
+			if(cond!=null) {
+				
+				Integer.parseInt(cond.getCedula());
+			
 			if(cond.getCedula()!=null && !cond.getCedula().equals("") ) {
 				
 				//validar nombre
-				if(cond.getNombre()!=null && !cond.getNombre().equals("")) {
+				if(cond.getNombre()!=null && !cond.getNombre().equals("") && cond.getNombre().length()>=3) {
 					//validar apellido
-					if(cond.getApellidos()!=null && !cond.getApellidos().equals("")) {
+					if(cond.getApellidos()!=null && !cond.getApellidos().equals("") && cond.getApellidos().length()>=3) {
 						//validar fecha nacimiento
 						if(cond.getFechaNacimiento()!=null) {
 							//validar fecha contratacion
@@ -63,6 +66,7 @@ public class Tmio1_Conductores_Logic implements ICondutoresLogic {
 					}
 					
 				}
+			}
 				
 			}
 			
@@ -78,16 +82,18 @@ public class Tmio1_Conductores_Logic implements ICondutoresLogic {
 	public boolean crearConductor(Tmio1Conductore cond) {
 
 		
-		if(cond!=null) {
-		// falta hacer todas las validaciones
 				if(validarConductor(cond)) {
 
-					em.getTransaction().begin();
-					conductorDAO.save(em, cond);
-					em.getTransaction().commit();
 					
+					try {
+						em.getTransaction().begin();
+						conductorDAO.save(em, cond);
+						em.getTransaction().commit();
+					} catch (Exception e) {
+						return false;
+					}
 					
-				}
+				
 				return true;
 		}else {
 			

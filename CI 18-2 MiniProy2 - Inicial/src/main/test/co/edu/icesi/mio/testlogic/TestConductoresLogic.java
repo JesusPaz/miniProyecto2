@@ -26,19 +26,13 @@ import co.edu.icesi.mio.model.*;
 public class TestConductoresLogic {
 
 
-	private ICondutoresLogic conductorLogic=new Tmio1_Conductores_Logic();
+	private ICondutoresLogic conductorLogic;
 
-//	@Before
-//	public void setupEscenario1() {
-//
-//		conductorLogic
-//	}
-//	
+   @Before
+	public void setupEscenario1() {
 
-	@Test
-	public void crearTest1() {
-
-		assertNotNull(conductorLogic);
+	   
+	   conductorLogic=new Tmio1_Conductores_Logic();
 		
 		
 		Tmio1Conductore conductor= new Tmio1Conductore();
@@ -100,7 +94,7 @@ public class TestConductoresLogic {
 		
 		Tmio1Conductore conductor6= new Tmio1Conductore();
 		conductor6.setCedula("15");
-		conductor6.setNombre("Jose");
+		conductor6.setNombre("Valentina");
 		conductor6.setApellidos("Clinton");
 		Calendar d10 = new GregorianCalendar(2016,05,02);
 		conductor6.setFechaContratacion(d10.getTime());
@@ -109,20 +103,43 @@ public class TestConductoresLogic {
 		conductor6.setTmio1Servicios(new ArrayList<Tmio1Servicio>());
 		conductor6.setTmio1ServiciosSitios(new ArrayList<Tmio1ServiciosSitio>());
 		
-		assertTrue(conductorLogic.crearConductor(conductor));
-		assertTrue(conductorLogic.crearConductor(conductor3));
-		assertTrue(conductorLogic.crearConductor(conductor2));
-		assertTrue(conductorLogic.crearConductor(conductor4));
-		assertTrue(conductorLogic.crearConductor(conductor5));
-		assertTrue(conductorLogic.crearConductor(conductor6));
+		conductorLogic.crearConductor(conductor);
+		conductorLogic.crearConductor(conductor3);
+		conductorLogic.crearConductor(conductor2);
+		conductorLogic.crearConductor(conductor4);
+		conductorLogic.crearConductor(conductor5);
+		conductorLogic.crearConductor(conductor6);
 
 		
 		
 		
 	}
 
-	/**
-	 * No funciona para una cedula "-" (ver validaciones)
+   /**
+	 * Funciona, crea un conductor con una cedula "89" 
+	 */
+   @Test
+	public void crearTest1() {
+
+		assertNotNull(conductorLogic);
+		
+		
+		Tmio1Conductore conductor= new Tmio1Conductore();
+		conductor.setCedula("89");
+		conductor.setNombre("Luis");
+		conductor.setApellidos("Miguel");
+		Calendar d = new GregorianCalendar(2015,07,12);
+		conductor.setFechaContratacion(d.getTime());
+		Calendar d1 = new GregorianCalendar(1989,03,20);
+		conductor.setFechaNacimiento(d1.getTime());
+		conductor.setTmio1Servicios(new ArrayList<Tmio1Servicio>());
+		conductor.setTmio1ServiciosSitios(new ArrayList<Tmio1ServiciosSitio>());
+		
+		assertTrue(conductorLogic.crearConductor(conductor));
+		
+	}
+   /**
+	 * Funciona, no crea un conductor con una cedula "gehkl" 
 	 */
 	@Test
 	public void crearTest2() {
@@ -131,7 +148,7 @@ public class TestConductoresLogic {
 		
 		
 		Tmio1Conductore conductor= new Tmio1Conductore();
-		conductor.setCedula("-");
+		conductor.setCedula("gehkl");
 		conductor.setNombre("Marcela");
 		conductor.setApellidos("Rodriguez");
 		Calendar d = new GregorianCalendar(2017,01,11);
@@ -145,18 +162,107 @@ public class TestConductoresLogic {
 		
 	}
 	
+	
+	
+	/**
+	 * Funciona, no deja crear un conductor con una cedula "" .
+	 */
+	@Test
+	public void crearTest3() {
+
+		assertNotNull(conductorLogic);
+		
+		
+		Tmio1Conductore conductor= new Tmio1Conductore();
+		conductor.setCedula("");
+		conductor.setNombre("Marcela");
+		conductor.setApellidos("Rodriguez");
+		Calendar d = new GregorianCalendar(2017,01,11);
+		conductor.setFechaContratacion(d.getTime());
+		Calendar d1 = new GregorianCalendar(1999,04,24);
+		conductor.setFechaNacimiento(d1.getTime());
+		conductor.setTmio1Servicios(new ArrayList<Tmio1Servicio>());
+		conductor.setTmio1ServiciosSitios(new ArrayList<Tmio1ServiciosSitio>());
+		
+		assertFalse(conductorLogic.crearConductor(conductor));
+		
+	}
+	
+	
+	/**
+	 * Funciona, no deja crear un conductor misma cedula de un conductor ya creado "7896" .
+	 */
+	@Test
+	public void crearTest4() {
+
+		assertNotNull(conductorLogic);
+		
+		
+		Tmio1Conductore conductor= new Tmio1Conductore();
+		conductor.setCedula("7896");
+		conductor.setNombre("Mateo");
+		conductor.setApellidos("Mar");
+		Calendar d = new GregorianCalendar(2017,01,11);
+		conductor.setFechaContratacion(d.getTime());
+		Calendar d1 = new GregorianCalendar(1999,04,24);
+		conductor.setFechaNacimiento(d1.getTime());
+		conductor.setTmio1Servicios(new ArrayList<Tmio1Servicio>());
+		conductor.setTmio1ServiciosSitios(new ArrayList<Tmio1ServiciosSitio>());
+		
+		
+		Tmio1Conductore conductor1= new Tmio1Conductore();
+		conductor1.setCedula("7896");
+		conductor1.setNombre("Marcela");
+		conductor1.setApellidos("Rodriguez");
+		Calendar d2 = new GregorianCalendar(2017,01,11);
+		conductor1.setFechaContratacion(d2.getTime());
+		Calendar d4 = new GregorianCalendar(1999,04,24);
+		conductor1.setFechaNacimiento(d4.getTime());
+		conductor1.setTmio1Servicios(new ArrayList<Tmio1Servicio>());
+		conductor1.setTmio1ServiciosSitios(new ArrayList<Tmio1ServiciosSitio>());
+		
+		assertTrue(conductorLogic.crearConductor(conductor));
+		assertFalse(conductorLogic.crearConductor(conductor1));
+		
+	}
+	
+	
+	/**
+	 * Funciona, no deja crear un conductor con un nombre y apellido 
+	 * de menos de tres caracteres. (VER VALIDACIONES)
+	 */
+	@Test
+	public void crearTest5() {
+
+		assertNotNull(conductorLogic);
+		
+		
+		Tmio1Conductore conductor= new Tmio1Conductore();
+		conductor.setCedula("443");
+		conductor.setNombre("Da");
+		conductor.setApellidos("Ro");
+		Calendar d = new GregorianCalendar(2017,01,11);
+		conductor.setFechaContratacion(d.getTime());
+		Calendar d1 = new GregorianCalendar(1999,04,24);
+		conductor.setFechaNacimiento(d1.getTime());
+		conductor.setTmio1Servicios(new ArrayList<Tmio1Servicio>());
+		conductor.setTmio1ServiciosSitios(new ArrayList<Tmio1ServiciosSitio>());
+		
+		assertFalse(conductorLogic.crearConductor(conductor));
+		
+	}
 
 	
 	///////////////BUSCAR POR NOMBRE
 	/**
-	 * Funciona encuentra 2 Diana para el crearTest1
+	 * Funciona encuentra 2 Valentina para el crearTest1
 	 */
 	@Test
 	public void buscarPorNombreTest1() {
 
 		assertNotNull(conductorLogic);
 		
-		List<Tmio1Conductore> lista =conductorLogic.buscarConductorNombre("Diana");
+		List<Tmio1Conductore> lista =conductorLogic.buscarConductorNombre("Valentina");
 		assertNotNull(lista);
 		assertEquals(2,lista.size());
 		
@@ -383,37 +489,208 @@ public class TestConductoresLogic {
 	
 	////////////ACTUALIZAR TEST
 	
-//	@Test
-//	public void actualizarTest() {
-//		setupEscenario1();
-//		
-//		
-//	}
+	
+	/**
+	 * Funciona, actualiza el conductor ced "01" llamado Diana a Rondal macdonald
+	 */
+	@Test
+	public void actualizarTest1() {
+		
+		assertNotNull(conductorLogic);
+		
+		Tmio1Conductore conductor= conductorLogic.buscarConductorCedula("01");
+		conductor.setNombre("RONALD");
+		conductor.setApellidos("MACDONALD'S");
+		Calendar d1 = new GregorianCalendar(1950,10,28);
+		conductor.setFechaNacimiento(d1.getTime());
+		
+		assertTrue(conductorLogic.actualizarConductor(conductor));
+		
+	}
+	
+	
+	/**
+	 * Funciona, no actualiza el conductor "1478" porque no existe en la base de datos 
+	 */
+	@Test
+	public void actualizarTest2() {
+		
+		assertNotNull(conductorLogic);
+		
+		Tmio1Conductore conductor= conductorLogic.buscarConductorCedula("1478");
+		if(conductor!=null) conductor.setNombre("a");
+		
+		assertFalse(conductorLogic.actualizarConductor(conductor));
+		
+	}
+	
+	/**
+	 * Funciona, no actualiza el conductor "" porque no existe en la base de datos 
+	 */
+	@Test
+	public void actualizarTest3() {
+		
+		assertNotNull(conductorLogic);
+		
+		Tmio1Conductore conductor= conductorLogic.buscarConductorCedula("");
+		assertFalse(conductorLogic.actualizarConductor(conductor));
+		
+	}
+	
+	/**
+	 * Funciona, actualiza el conductor "01" que se había actualizado en actualizarTest1
+	 */
+	@Test
+	public void actualizarTest4() {
+		
+		assertNotNull(conductorLogic);
+		
+		Tmio1Conductore conductor= conductorLogic.buscarConductorCedula("01");
+		conductor.setNombre("TommY");
+		
+		assertTrue(conductorLogic.actualizarConductor(conductor));
+		
+	}
+	
+	
+	/**
+	 * Funciona, no actualiza el conductor "123"
+	 */
+	@Test
+	public void actualizarTest5() {
+		
+		assertNotNull(conductorLogic);
+		
+		Tmio1Conductore conductor= conductorLogic.buscarConductorCedula("123");
+
+		assertTrue(conductorLogic.actualizarConductor(conductor));
+		
+	}
+	
 	
 	
 	///////////////BORRAR TEST
-//
-//	
-//	@Test
-//	@After
-//	public void borrarTest() {
-//		
-//		assertNotNull(conductorLogic);
-////		
-////		assertTrue(conductorLogic.borrarConductor(conductorLogic.buscarConductorCedula("15")));
-////		assertNull(conductorLogic.buscarConductorCedula("15"));
-////		assertTrue(conductorLogic.borrarConductor(conductorLogic.buscarConductorCedula("123")));
-////		assertNull(conductorLogic.buscarConductorCedula("123"));
-//		
-//
-//		assertTrue(conductorLogic.borrarConductor(conductorLogic.buscarConductorCedula("01")));
-//		assertTrue(conductorLogic.borrarConductor(conductorLogic.buscarConductorCedula("02")));
-//		assertTrue(conductorLogic.borrarConductor(conductorLogic.buscarConductorCedula("06")));
-//		assertTrue(conductorLogic.borrarConductor(conductorLogic.buscarConductorCedula("10")));
-//		assertTrue(conductorLogic.borrarConductor(conductorLogic.buscarConductorCedula("123")));
-//		assertTrue(conductorLogic.borrarConductor(conductorLogic.buscarConductorCedula("15")));
-//				
-//	}
+
+	/**
+	 * Funciona, elimina todas los conductores creados en el test1
+	 */
+	@Test
+	public void borrarTest1() {
+		
+		assertNotNull(conductorLogic);
+
+		assertTrue(conductorLogic.borrarConductor(conductorLogic.buscarConductorCedula("01")));
+		assertTrue(conductorLogic.borrarConductor(conductorLogic.buscarConductorCedula("02")));
+		assertTrue(conductorLogic.borrarConductor(conductorLogic.buscarConductorCedula("06")));
+		assertTrue(conductorLogic.borrarConductor(conductorLogic.buscarConductorCedula("10")));
+		assertTrue(conductorLogic.borrarConductor(conductorLogic.buscarConductorCedula("123")));
+		assertTrue(conductorLogic.borrarConductor(conductorLogic.buscarConductorCedula("15")));
+		
+				
+	}
+	
+	public void setupEscenario2() {
+		Tmio1Conductore conductor= new Tmio1Conductore();
+		conductor.setCedula("03");
+		conductor.setNombre("Juan");
+		conductor.setApellidos("Reyes");
+		Calendar d = new GregorianCalendar(2017,02,10);
+		conductor.setFechaContratacion(d.getTime());
+		Calendar d1 = new GregorianCalendar(1996,04,21);
+		conductor.setFechaNacimiento(d1.getTime());
+		conductor.setTmio1Servicios(new ArrayList<Tmio1Servicio>());
+		conductor.setTmio1ServiciosSitios(new ArrayList<Tmio1ServiciosSitio>());
+		
+		
+		Tmio1Conductore conductor3= new Tmio1Conductore();
+		conductor3.setCedula("111");
+		conductor3.setNombre("Stephany");
+		conductor3.setApellidos("Nieto");
+		Calendar d4 = new GregorianCalendar(2004,10,20);
+		conductor3.setFechaContratacion(d4.getTime());
+		Calendar d5 = new GregorianCalendar(1950,11,22);
+		conductor3.setFechaNacimiento(d5.getTime());
+		conductor3.setTmio1Servicios(new ArrayList<Tmio1Servicio>());
+		conductor3.setTmio1ServiciosSitios(new ArrayList<Tmio1ServiciosSitio>());
+		
+		Tmio1Conductore conductor2= new Tmio1Conductore();
+		conductor2.setCedula("08");
+		conductor2.setNombre("Manuel");
+		conductor2.setApellidos("Jimenez");
+		Calendar d2 = new GregorianCalendar(2017,07,03);
+		conductor2.setFechaContratacion(d2.getTime());
+		Calendar d3 = new GregorianCalendar(1998,05,20);
+		conductor2.setFechaNacimiento(d3.getTime());
+		conductor2.setTmio1Servicios(new ArrayList<Tmio1Servicio>());
+		conductor2.setTmio1ServiciosSitios(new ArrayList<Tmio1ServiciosSitio>());
+		
+		conductorLogic.crearConductor(conductor);
+		conductorLogic.crearConductor(conductor2);
+		conductorLogic.crearConductor(conductor3);
+		
+	}
+	
+	
+	/**
+	 * Funciona, elimina los conductores "03" y "08" del escenario2
+	 */
+	@Test
+	public void borrarTest2() {
+		setupEscenario2();
+		
+		assertNotNull(conductorLogic);
+
+		assertTrue(conductorLogic.borrarConductor(conductorLogic.buscarConductorCedula("03")));
+		assertTrue(conductorLogic.borrarConductor(conductorLogic.buscarConductorCedula("08")));
+		
+				
+	}
+	
+	
+	
+	/**
+	 * Funciona, no elimina  el conductor "03" porque no existe , se elimino en
+	 * el borrartest2
+	 */
+	@Test
+	public void borrarTest3() {
+		
+		
+		assertNotNull(conductorLogic);
+		assertFalse(conductorLogic.borrarConductor(conductorLogic.buscarConductorCedula("03")));
+				
+	}
+	
+	
+	/**
+	 * Funciona, no elimina el conductor "3940" porque no existe y nunca se ha agregado
+	 */
+	@Test
+	public void borrarTest4() {
+		
+		assertNotNull(conductorLogic);
+		assertFalse(conductorLogic.borrarConductor(conductorLogic.buscarConductorCedula("3940")));
+		
+				
+	}
+	
+	
+	
+	/**
+	 * Funciona, no elimina el conductor con cedula "" porque no es válido
+	 */
+	@Test
+	public void borrarTest5() {
+		
+		assertNotNull(conductorLogic);
+
+
+		assertFalse(conductorLogic.borrarConductor(conductorLogic.buscarConductorCedula("")));
+
+				
+	}
+	
+	
 	
 
 }
