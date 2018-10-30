@@ -28,6 +28,9 @@ public class TestRutasLogic {
 		rutasLogic=new Tmio1_Rutas_Logic();
 	}
 	
+	/*
+	 * Agrega todos los datos
+	 */
 	@Test
 	public void crearTest() {
 		
@@ -35,7 +38,7 @@ public class TestRutasLogic {
 		assertNotNull(rutasLogic);
 		
 		Tmio1Ruta ruta= new Tmio1Ruta();
-		ruta.setActiva("A");
+		ruta.setActiva("S");
 		ruta.setDescripcion("ruta A a B");
 		ruta.setDiaInicio(new BigDecimal(6));
 		ruta.setDiaFin(new BigDecimal(7));
@@ -48,7 +51,7 @@ public class TestRutasLogic {
     	
     	
     	Tmio1Ruta ruta1= new Tmio1Ruta();
-		ruta1.setActiva("I");
+		ruta1.setActiva("S");
 		ruta1.setDescripcion("ruta B a D");
 		ruta1.setDiaInicio(new BigDecimal(7));
 		ruta1.setDiaFin(new BigDecimal(7));
@@ -60,7 +63,7 @@ public class TestRutasLogic {
     	ruta1.setTmio1SitiosRutas1(new ArrayList<Tmio1SitiosRuta>());
     	
     	Tmio1Ruta ruta2= new Tmio1Ruta();
-		ruta2.setActiva("A");
+		ruta2.setActiva("N");
 		ruta2.setDescripcion("ruta C a F");
 		ruta2.setDiaInicio(new BigDecimal(1));
 		ruta2.setDiaFin(new BigDecimal(5));
@@ -73,7 +76,7 @@ public class TestRutasLogic {
     	
     	
     	Tmio1Ruta ruta3= new Tmio1Ruta();
-		ruta3.setActiva("A");
+		ruta3.setActiva("S");
 		ruta3.setDescripcion("ruta D a G");
 		ruta3.setDiaInicio(new BigDecimal(1));
 		ruta3.setDiaFin(new BigDecimal(3));
@@ -88,6 +91,206 @@ public class TestRutasLogic {
     	assertTrue(rutasLogic.crearRuta(ruta1));
     	assertTrue(rutasLogic.crearRuta(ruta2));
     	assertTrue(rutasLogic.crearRuta(ruta3));
+	}
+	
+	/*
+	 * prueba con numero difenrete 3 carcteres, por lo tanto falla
+	 */
+	@Test
+	public void crearTest1() {
+	
+		assertNotNull(rutasLogic);
+		
+		Tmio1Ruta ruta= new Tmio1Ruta();
+		ruta.setActiva("S");
+		ruta.setDescripcion("ruta A a B");
+		ruta.setDiaInicio(new BigDecimal(6));
+		ruta.setDiaFin(new BigDecimal(7));
+		ruta.setHoraInicio(new BigDecimal(5));
+		ruta.setHoraFin(new BigDecimal(15));
+		ruta.setNumero("P272");
+		ruta.setTmio1Servicios(new ArrayList<Tmio1Servicio>());
+		ruta.setTmio1ServiciosSitios(new ArrayList<Tmio1ServiciosSitio>());
+		ruta.setTmio1SitiosRutas1(new ArrayList<Tmio1SitiosRuta>());
+	
+		assertFalse(rutasLogic.crearRuta(ruta));
+		
+	}
+	
+	/*
+	 * prueba con dia inicio y fin, no numericos y fuera de rango, por lo tanto falla
+	 */
+	@Test
+	public void crearTest2() {
+	
+		assertNotNull(rutasLogic);
+		Tmio1Ruta ruta2= new Tmio1Ruta();
+		ruta2.setActiva("S");
+		ruta2.setDescripcion("ruta A a B");
+		ruta2.setDiaInicio(new BigDecimal(1));
+		ruta2.setDiaFin(new BigDecimal(40));
+		ruta2.setHoraInicio(new BigDecimal(5));
+		ruta2.setHoraFin(new BigDecimal(15));
+		ruta2.setNumero("P27");
+		ruta2.setTmio1Servicios(new ArrayList<Tmio1Servicio>());
+		ruta2.setTmio1ServiciosSitios(new ArrayList<Tmio1ServiciosSitio>());
+		ruta2.setTmio1SitiosRutas1(new ArrayList<Tmio1SitiosRuta>());
+	
+		assertFalse(rutasLogic.crearRuta(ruta2));
+		
+		Tmio1Ruta ruta3= new Tmio1Ruta();
+		ruta3.setActiva("S");
+		ruta3.setDescripcion("ruta A a B");
+		ruta3.setDiaInicio(new BigDecimal(0));
+		ruta3.setDiaFin(new BigDecimal(7));
+		ruta3.setHoraInicio(new BigDecimal(5));
+		ruta3.setHoraFin(new BigDecimal(15));
+		ruta3.setNumero("P27");
+		ruta3.setTmio1Servicios(new ArrayList<Tmio1Servicio>());
+		ruta3.setTmio1ServiciosSitios(new ArrayList<Tmio1ServiciosSitio>());
+		ruta3.setTmio1SitiosRutas1(new ArrayList<Tmio1SitiosRuta>());
+	
+		assertFalse(rutasLogic.crearRuta(ruta3));
+	
+		try {
+			Tmio1Ruta ruta= new Tmio1Ruta();
+			ruta.setActiva("S");
+			ruta.setDescripcion("ruta A a B");
+			ruta.setDiaInicio(new BigDecimal("d54"));
+			ruta.setDiaFin(new BigDecimal(7));
+			ruta.setHoraInicio(new BigDecimal(5));
+			ruta.setHoraFin(new BigDecimal(15));
+			ruta.setNumero("P27");
+			ruta.setTmio1Servicios(new ArrayList<Tmio1Servicio>());
+			ruta.setTmio1ServiciosSitios(new ArrayList<Tmio1ServiciosSitio>());
+			ruta.setTmio1SitiosRutas1(new ArrayList<Tmio1SitiosRuta>());
+		
+			assertFalse(rutasLogic.crearRuta(ruta));
+		} catch (Exception e) {
+			assert(e instanceof NumberFormatException);
+		}
+	
+		
+			
+	}
+	/*
+	 * prueba con hora fuera de rango, no numerica, por lo tanto falla
+	 */
+	@Test
+	public void crearTest3() {
+	
+		assertNotNull(rutasLogic);
+	
+		
+		Tmio1Ruta ruta2= new Tmio1Ruta();
+		ruta2.setActiva("S");
+		ruta2.setDescripcion("ruta A a B");
+		ruta2.setDiaInicio(new BigDecimal(6));
+		ruta2.setDiaFin(new BigDecimal(7));
+		ruta2.setHoraInicio(new BigDecimal(-5));
+		ruta2.setHoraFin(new BigDecimal(15));
+		ruta2.setNumero("P27");
+		ruta2.setTmio1Servicios(new ArrayList<Tmio1Servicio>());
+		ruta2.setTmio1ServiciosSitios(new ArrayList<Tmio1ServiciosSitio>());
+		ruta2.setTmio1SitiosRutas1(new ArrayList<Tmio1SitiosRuta>());
+	
+		assertFalse(rutasLogic.crearRuta(ruta2));
+	
+		
+		Tmio1Ruta ruta3= new Tmio1Ruta();
+		ruta3.setActiva("S");
+		ruta3.setDescripcion("ruta A a B");
+		ruta3.setDiaInicio(new BigDecimal(6));
+		ruta3.setDiaFin(new BigDecimal(7));
+		ruta3.setHoraInicio(new BigDecimal(5));
+		ruta3.setHoraFin(new BigDecimal(1441));
+		ruta3.setNumero("P27");
+		ruta3.setTmio1Servicios(new ArrayList<Tmio1Servicio>());
+		ruta3.setTmio1ServiciosSitios(new ArrayList<Tmio1ServiciosSitio>());
+		ruta3.setTmio1SitiosRutas1(new ArrayList<Tmio1SitiosRuta>());
+	
+		assertFalse(rutasLogic.crearRuta(ruta3));
+		
+		
+		Tmio1Ruta ruta4= new Tmio1Ruta();
+		ruta4.setActiva("S");
+		ruta4.setDescripcion("ruta A a B");
+		ruta4.setDiaInicio(new BigDecimal(6));
+		ruta4.setDiaFin(new BigDecimal(7));
+		ruta4.setHoraInicio(new BigDecimal(7));
+		ruta4.setHoraFin(new BigDecimal(1));
+		ruta4.setNumero("P27");
+		ruta4.setTmio1Servicios(new ArrayList<Tmio1Servicio>());
+		ruta4.setTmio1ServiciosSitios(new ArrayList<Tmio1ServiciosSitio>());
+		ruta4.setTmio1SitiosRutas1(new ArrayList<Tmio1SitiosRuta>());
+	
+		assertFalse(rutasLogic.crearRuta(ruta4));
+		
+		
+		try {
+			Tmio1Ruta ruta= new Tmio1Ruta();
+			ruta.setActiva("S");
+			ruta.setDescripcion("ruta A a B");
+			ruta.setDiaInicio(new BigDecimal(6));
+			ruta.setDiaFin(new BigDecimal(7));
+			ruta.setHoraInicio(new BigDecimal("f52"));
+			ruta.setHoraFin(new BigDecimal(15));
+			ruta.setNumero("P27");
+			ruta.setTmio1Servicios(new ArrayList<Tmio1Servicio>());
+			ruta.setTmio1ServiciosSitios(new ArrayList<Tmio1ServiciosSitio>());
+			ruta.setTmio1SitiosRutas1(new ArrayList<Tmio1SitiosRuta>());
+		
+			assertFalse(rutasLogic.crearRuta(ruta));
+		} catch (Exception e) {
+			assert(e instanceof NumberFormatException);
+		}
+		
+	}
+	/*
+	 * prueba con activa diferente a S o N, por lo tanto falla
+	 */
+	@Test
+	public void crearTest4() {
+	
+		assertNotNull(rutasLogic);
+		
+		Tmio1Ruta ruta= new Tmio1Ruta();
+		ruta.setActiva("W");
+		ruta.setDescripcion("ruta A a B");
+		ruta.setDiaInicio(new BigDecimal(6));
+		ruta.setDiaFin(new BigDecimal(7));
+		ruta.setHoraInicio(new BigDecimal(5));
+		ruta.setHoraFin(new BigDecimal(15));
+		ruta.setNumero("P27");
+		ruta.setTmio1Servicios(new ArrayList<Tmio1Servicio>());
+		ruta.setTmio1ServiciosSitios(new ArrayList<Tmio1ServiciosSitio>());
+		ruta.setTmio1SitiosRutas1(new ArrayList<Tmio1SitiosRuta>());
+	
+		assertFalse(rutasLogic.crearRuta(ruta));
+		
+	}
+	/*
+	 * prueba con todo null , por lo tanto falla
+	 */
+	@Test
+	public void crearTest5() {
+	
+		assertNotNull(rutasLogic);
+		
+		Tmio1Ruta ruta= new Tmio1Ruta();
+		ruta.setActiva(null);
+		ruta.setDescripcion(null);
+		ruta.setDiaInicio(null);
+		ruta.setDiaFin(null);
+		ruta.setHoraInicio(null);
+		ruta.setHoraFin(null);
+		ruta.setNumero(null);
+		ruta.setTmio1Servicios(null);
+		ruta.setTmio1ServiciosSitios(null);
+		ruta.setTmio1SitiosRutas1(null);
+	
+		assertFalse(rutasLogic.crearRuta(ruta));
+		
 	}
 	
 	
@@ -105,7 +308,7 @@ public class TestRutasLogic {
 	}
 	
 	
-	@Test
+//	@Test
 	public void actualizarTest() {
 		
 		
@@ -121,7 +324,7 @@ public class TestRutasLogic {
 		assertTrue(rutasLogic.actualizarRuta(actualizada2));
 	}
 	
-	@Test
+	//@Test
 	public void borrarTest() {
 		
 		
@@ -144,6 +347,7 @@ public class TestRutasLogic {
 		
 		List<Tmio1Ruta> rutas = rutasLogic.buscarRutaRango(new BigDecimal(2), new BigDecimal(7));
 		assertNotNull("No existen rutas en este rango de dias", rutas);		
-		assertEquals(2, rutas.size());}
+		assertEquals(2, rutas.size());
+		}
 
 }

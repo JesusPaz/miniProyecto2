@@ -78,6 +78,8 @@ public class Tmio1_Servicios_Logic implements IServiciosLogic{
 	 
 		public boolean validarServicio(Tmio1Servicio servicio) {
 			//TODO
+			
+			//falta lo de la llaves foraneas
 			boolean ret =false;
 			// validar llaves foraneas
 			if(servicio.getTmio1Bus()!=null) {
