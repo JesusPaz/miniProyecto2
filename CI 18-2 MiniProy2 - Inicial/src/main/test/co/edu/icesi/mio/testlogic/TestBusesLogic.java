@@ -21,27 +21,12 @@ import co.edu.icesi.mio.model.Tmio1ServiciosSitio;
 public class TestBusesLogic {
 
 	
-	private IBusesLogic busesLogic ;
+	private Tmio1_Buses_Logic busesLogic = new Tmio1_Buses_Logic();;
 	
-	@Before
-	public void setupEscenario1() {
-
-		busesLogic= new Tmio1_Buses_Logic();
-	}
-	
-
-	/*
-	 * falla, por eso esta comentado
-	 */
-	
-//	@Test
 //	@Before
-	public void crearTest1() {
+	public void setupEscenario1() {
 		
-	
-		assertNotNull(busesLogic);
-		
-		
+
 		Tmio1Bus bus = new Tmio1Bus();
 		
 		bus.setCapacidad(new BigDecimal(2000));
@@ -87,16 +72,44 @@ public class TestBusesLogic {
 		bus3.setTmio1ServiciosSitios(new ArrayList<Tmio1ServiciosSitio>());
 		
 		
-		assertTrue(busesLogic.crearBus(bus));
-		assertTrue(busesLogic.crearBus(bus1));
-		assertTrue(busesLogic.crearBus(bus2));
-		assertTrue(busesLogic.crearBus(bus3));
+		busesLogic.crearBus(bus);
+		busesLogic.crearBus(bus1);
+		busesLogic.crearBus(bus2);
+		busesLogic.crearBus(bus3);
 		
+
+	}
+	
+	
+	
+
+	/*
+	 * falla, por eso esta comentado
+	 */
+	
+	@Test
+	public void crearTest1() {
+		
+		assertNotNull(busesLogic);
+		Tmio1Bus bus = new Tmio1Bus();
+		
+		bus.setCapacidad(new BigDecimal(2000));
+		bus.setMarca("Nuevo45");
+		bus.setModelo(new BigDecimal(2015));
+		bus.setPlaca("KGZ999");
+		bus.setTipo("T");
+		bus.setTmio1Servicios(new ArrayList<Tmio1Servicio>());
+		bus.setTmio1ServiciosSitios(new ArrayList<Tmio1ServiciosSitio>());
+
+		assertTrue(busesLogic.crearBus(bus));
+
+		
+
 	}
 	/*
 	 * Prueba con placa = null, "", diferente a 6 por lo tanto funciona mal
 	 */
-//	@Test
+	@Test
 	public void crearTest2() {
 		assertNotNull(busesLogic);
 		
@@ -104,7 +117,7 @@ public class TestBusesLogic {
 		Tmio1Bus bus = new Tmio1Bus();
 		
 		bus.setCapacidad(new BigDecimal(2000));
-		bus.setMarca("Renault");
+		bus.setMarca("RenaultPlacaNull1");
 		bus.setModelo(new BigDecimal(2015));
 		bus.setPlaca(null);
 		bus.setTipo("T");
@@ -114,7 +127,7 @@ public class TestBusesLogic {
 		Tmio1Bus bus1 = new Tmio1Bus();
 		
 		bus1.setCapacidad(new BigDecimal(2000));
-		bus1.setMarca("Renault");
+		bus1.setMarca("RenaultPlacaNull2");
 		bus1.setModelo(new BigDecimal(2015));
 		bus1.setPlaca("");
 		bus1.setTipo("T");
@@ -124,7 +137,7 @@ public class TestBusesLogic {
 		Tmio1Bus bus2 = new Tmio1Bus();
 		
 		bus2.setCapacidad(new BigDecimal(2000));
-		bus2.setMarca("Renault");
+		bus2.setMarca("RenaultPlacaNull3");
 		bus2.setModelo(new BigDecimal(2015));
 		bus2.setPlaca("ASD2");
 		bus2.setTipo("T");
@@ -141,7 +154,7 @@ public class TestBusesLogic {
 	 * Prueba con marca = null, "", menor a 3, por lo tanto funciona mal
 	 */
 	
-//	@Test
+	@Test
 	public void crearTest3() {
 		assertNotNull(busesLogic);
 		
@@ -185,7 +198,7 @@ public class TestBusesLogic {
 	 * Prueba con modelo = null, menor a 1000, por lo tanto funciona mal
 	 */
 	
-//	@Test
+	@Test
 	public void crearTest4() {
 		assertNotNull(busesLogic);
 		
@@ -230,14 +243,14 @@ public class TestBusesLogic {
 	 * Prueba con capacidad = null,  menor a 1, por lo tanto funciona mal
 	 */
 	
-//	@Test
+	@Test
 	public void crearTest5() {
 		assertNotNull(busesLogic);
 		
 		
 		Tmio1Bus bus = new Tmio1Bus();
 		
-		bus.setCapacidad(new BigDecimal(0));
+		bus.setCapacidad(null);
 		bus.setMarca("aolslslsl");
 		bus.setModelo(new BigDecimal(2015));
 		bus.setPlaca("ADB132");
@@ -432,10 +445,15 @@ public class TestBusesLogic {
 	@Test
 	public void buscarCapacidadTest1() {
 		assertNotNull(busesLogic);
+		if(busesLogic!=null) {
 		List<Tmio1Bus> buses = busesLogic.buscarBusCapacidad(new BigDecimal(2000));
 		
 		assertNotNull("No se encontro el bus por ese modelo", buses);	
+		if(buses!=null) {
+			System.out.println("buses no null");
 		assertEquals(3, buses.size());
+		}
+		}
 	}
 	
 	/*
@@ -492,11 +510,11 @@ public class TestBusesLogic {
 	/*
 	 * falla, por eso esta comentado
 	 */
-//	@Test
+	@Test
 	public void actualizarTest1() {
 		assertNotNull(busesLogic);
 		
-	Tmio1Bus bus = new Tmio1Bus();
+	    Tmio1Bus bus = new Tmio1Bus();
 		
 		bus.setCapacidad(new BigDecimal(2000));
 		bus.setMarca("Renault");

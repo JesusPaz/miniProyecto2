@@ -10,24 +10,32 @@ import javax.persistence.PersistenceContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.test.annotation.Rollback;
+import org.springframework.test.context.ContextConfiguration;
 
 import co.edu.icesi.mio.dao.ITmio1_Buses_DAO;
 import co.edu.icesi.mio.dao.Tmio1_Buses_DAO;
 import co.edu.icesi.mio.model.Tmio1Bus;
 
-@Service
+
+//@Service
+@ContextConfiguration("/applicationContext.xml")
+@Rollback(false)
 public class Tmio1_Buses_Logic implements IBusesLogic {
 	
 
-	EntityManagerFactory managerFactor = Persistence.createEntityManagerFactory("MiniProyectoComputacion");
-	
-	// atributos
-	@PersistenceContext
-    private EntityManager em= managerFactor.createEntityManager();
-	
 	@Autowired
-    private ITmio1_Buses_DAO busesDAO = new Tmio1_Buses_DAO();
+    private ITmio1_Buses_DAO busesDAO= new Tmio1_Buses_DAO();
+	
+
+	private EntityManagerFactory emf = Persistence.createEntityManagerFactory("MiniProyectoComputacion");
+	
+	@PersistenceContext
+	private EntityManager em= emf.createEntityManager();
+	
+	
 	
 	
 
@@ -56,19 +64,19 @@ public class Tmio1_Buses_Logic implements IBusesLogic {
 				}	
 			}
 		}
-		System.out.println(ret);
+		
 		return ret;
 	}
 	
-	@Transactional
+	@Transactional(readOnly=false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public boolean crearBus(Tmio1Bus bus) {
 		
 		
 		if(validarBus(bus)) {
 
-			em.getTransaction().begin();
+			
 			busesDAO.save(em, bus);
-			em.getTransaction().commit();
+		
 			
 			return true;
 		}else {
@@ -77,14 +85,15 @@ public class Tmio1_Buses_Logic implements IBusesLogic {
 		
 	}
 	
-	@Transactional
+
+	@Transactional(readOnly=false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public Tmio1Bus buscarPlaca(String placa) {
 		
 		if(placa!=null&&!placa.equals("")) {
 
-			em.getTransaction().begin();
+			
 			Tmio1Bus act=busesDAO.findByPlaca(em, placa);
-			em.getTransaction().commit();
+			
 			
 			return act;
 		}else {
@@ -92,15 +101,16 @@ public class Tmio1_Buses_Logic implements IBusesLogic {
 		}
 	}
 	
-	@Transactional
+
+	@Transactional(readOnly=false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public boolean actualizarBus(Tmio1Bus bus) {
 		
 		
 		if(validarBus(bus)) {
 
-			em.getTransaction().begin();
+	
 			busesDAO.update(em, bus);
-			em.getTransaction().commit();
+			
 			
 			return true;
 		}else {
@@ -109,15 +119,16 @@ public class Tmio1_Buses_Logic implements IBusesLogic {
 
 	}
 	
-	@Transactional
+
+	@Transactional(readOnly=false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public boolean borrarBus(Tmio1Bus bus) {
 		
 		
 		if(validarBus(bus)) {
 
-			em.getTransaction().begin();
+			
 			busesDAO.delete(em, bus);
-			em.getTransaction().commit();
+			
 			
 			return true;
 		}else {
@@ -126,16 +137,17 @@ public class Tmio1_Buses_Logic implements IBusesLogic {
 
 	}
 	
-	@Transactional
+
+	@Transactional(readOnly=false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public List<Tmio1Bus> buscarBusModelo(BigDecimal modelo) {
 		
 		
 		
 		if(modelo!=null && modelo.compareTo(new BigDecimal(1000))>=0) {
 
-			em.getTransaction().begin();
+			
 			List<Tmio1Bus> act= busesDAO.findByModel(em, modelo);
-			em.getTransaction().commit();
+		
 			
 			return act;
 		}else {
@@ -144,15 +156,16 @@ public class Tmio1_Buses_Logic implements IBusesLogic {
 		
 	}
 	
-	@Transactional
+
+	@Transactional(readOnly=false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public List<Tmio1Bus> buscarBusTipo(String tipo) {
 		
 		
 		if(tipo!=null && (tipo.equals("P")||tipo.equals("A")||tipo.equals("T"))) {
 
-			em.getTransaction().begin();
+		
 			List<Tmio1Bus> act= busesDAO.findByType(em, tipo);
-			em.getTransaction().commit();
+
 			
 			return act;
 		}else {
@@ -161,20 +174,21 @@ public class Tmio1_Buses_Logic implements IBusesLogic {
 		
 	}
 	
-	@Transactional
+
+	@Transactional(readOnly=false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public List<Tmio1Bus> buscarBusCapacidad(BigDecimal capacidad) {
 		
-		
-		if(capacidad!=null && capacidad.compareTo(new BigDecimal(0))>0) {
+		List<Tmio1Bus> act=null;
+		if(capacidad!=null ) {
 
-			em.getTransaction().begin();
-			List<Tmio1Bus> act= busesDAO.findByCapacity(em, capacidad);
-			em.getTransaction().commit();
+			if (capacidad.compareTo(new BigDecimal(0))>0 && busesDAO!=null) {
+				
+			 act= busesDAO.findByCapacity(em, capacidad);
 			
-			return act;
-		}else {
-			return null;	
+			}
 		}
+			return act;	
+		
 		
 	}
 
