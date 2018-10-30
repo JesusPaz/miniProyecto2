@@ -514,18 +514,9 @@ public class TestBusesLogic {
 	public void actualizarTest1() {
 		assertNotNull(busesLogic);
 		
-	    Tmio1Bus bus = new Tmio1Bus();
-		
-		bus.setCapacidad(new BigDecimal(2000));
-		bus.setMarca("Renault");
-		bus.setModelo(new BigDecimal(2015));
-		bus.setPlaca("");
-		bus.setTipo("T");
-		bus.setTmio1Servicios(new ArrayList<Tmio1Servicio>());
-		bus.setTmio1ServiciosSitios(new ArrayList<Tmio1ServiciosSitio>());
-		
+//	    busesLogic.buscarPlaca(placa)
 	
-		assertFalse(busesLogic.actualizarBus(bus));
+//		assertFalse(busesLogic.actualizarBus(bus));
 		
 	}
 	/*
