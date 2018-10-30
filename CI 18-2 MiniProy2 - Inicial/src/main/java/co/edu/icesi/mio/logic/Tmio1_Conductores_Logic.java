@@ -30,7 +30,7 @@ public class Tmio1_Conductores_Logic implements ICondutoresLogic {
     private ITmio1_Conductores_DAO conductorDAO  =new Tmio1_Conductores_DAO();
 	//preguntar pq cuando se quita el new falla la instanciacion
 	
-	
+	////////
 	//METODOS
 	
 	// CONDUCTORES
@@ -44,16 +44,15 @@ public class Tmio1_Conductores_Logic implements ICondutoresLogic {
 	public boolean validarConductor(Tmio1Conductore cond) {
 		boolean ret = false;
 		try {
-			
-			//TODO
+	
 			// validar cedula
-			//Integer.parseInt(cond.getCedula());
+			Integer.parseInt(cond.getCedula());
 			if(cond.getCedula()!=null && !cond.getCedula().equals("") ) {
 				
 				//validar nombre
 				if(cond.getNombre()!=null && !cond.getNombre().equals("")) {
 					//validar apellido
-					if(cond.getApellidos()!=null) {
+					if(cond.getApellidos()!=null && !cond.getApellidos().equals("")) {
 						//validar fecha nacimiento
 						if(cond.getFechaNacimiento()!=null) {
 							//validar fecha contratacion
@@ -77,8 +76,7 @@ public class Tmio1_Conductores_Logic implements ICondutoresLogic {
 	
 	@Transactional 
 	public boolean crearConductor(Tmio1Conductore cond) {
-//		System.out.println(cond.getCedula() +" "+cond.getNombre() +" "+cond.getApellidos()+" "+cond.getTmio1Servicios());
-	
+
 		
 		if(cond!=null) {
 		// falta hacer todas las validaciones
@@ -101,9 +99,7 @@ public class Tmio1_Conductores_Logic implements ICondutoresLogic {
 	
 	@Transactional
 	public boolean actualizarConductor(Tmio1Conductore cond) {
-		
-		
-		// falta hacer todas las validaciones
+	
 		if(validarConductor(cond)) {
 
 			em.getTransaction().begin();
@@ -120,7 +116,6 @@ public class Tmio1_Conductores_Logic implements ICondutoresLogic {
 	@Transactional
 	public boolean borrarConductor(Tmio1Conductore cond) {
 		
-		// falta hacer todas las validaciones
 		if(validarConductor(cond)) {
 
 			em.getTransaction().begin();
@@ -137,7 +132,7 @@ public class Tmio1_Conductores_Logic implements ICondutoresLogic {
 	
 
 	public List<Tmio1Conductore> buscarConductorNombre(String nombre) {
-		// falta hacer todas las validaciones
+		
 		if(!nombre.equals("") && nombre != null) {
 
 			em.getTransaction().begin();
@@ -169,7 +164,7 @@ public class Tmio1_Conductores_Logic implements ICondutoresLogic {
 	
 
 	public Tmio1Conductore buscarConductorCedula(String cedula) {
-		// falta hacer todas las validaciones
+
 		if(!cedula.equals("") && cedula !=null) {
 
 			em.getTransaction().begin();

@@ -26,20 +26,18 @@ import co.edu.icesi.mio.model.*;
 public class TestConductoresLogic {
 
 
-	private ICondutoresLogic conductorLogic;
+	private ICondutoresLogic conductorLogic=new Tmio1_Conductores_Logic();
 
-	@Before
-	public void setupEscenario1() {
+//	@Before
+//	public void setupEscenario1() {
+//
+//		conductorLogic
+//	}
+//	
 
-		conductorLogic=new Tmio1_Conductores_Logic();
-	}
-	
-	
 	@Test
-	@Before
-	public void crearTest() {
+	public void crearTest1() {
 
-//		setupEscenario1();
 		assertNotNull(conductorLogic);
 		
 		
@@ -68,7 +66,7 @@ public class TestConductoresLogic {
 		
 		Tmio1Conductore conductor2= new Tmio1Conductore();
 		conductor2.setCedula("02");
-		conductor2.setNombre("Jesús");
+		conductor2.setNombre("Jesus");
 		conductor2.setApellidos("Pazi");
 		Calendar d2 = new GregorianCalendar(2017,07,03);
 		conductor2.setFechaContratacion(d2.getTime());
@@ -122,24 +120,110 @@ public class TestConductoresLogic {
 		
 		
 	}
-	
-	
+
+	/**
+	 * No funciona para una cedula "-" (ver validaciones)
+	 */
 	@Test
-	public void buscarPorNombreTest() {
-//		setupEscenario1();
+	public void crearTest2() {
+
+		assertNotNull(conductorLogic);
+		
+		
+		Tmio1Conductore conductor= new Tmio1Conductore();
+		conductor.setCedula("-");
+		conductor.setNombre("Marcela");
+		conductor.setApellidos("Rodriguez");
+		Calendar d = new GregorianCalendar(2017,01,11);
+		conductor.setFechaContratacion(d.getTime());
+		Calendar d1 = new GregorianCalendar(1999,04,24);
+		conductor.setFechaNacimiento(d1.getTime());
+		conductor.setTmio1Servicios(new ArrayList<Tmio1Servicio>());
+		conductor.setTmio1ServiciosSitios(new ArrayList<Tmio1ServiciosSitio>());
+		
+		assertFalse(conductorLogic.crearConductor(conductor));
+		
+	}
+	
+
+	
+	///////////////BUSCAR POR NOMBRE
+	/**
+	 * Funciona encuentra 2 Diana para el crearTest1
+	 */
+	@Test
+	public void buscarPorNombreTest1() {
+
 		assertNotNull(conductorLogic);
 		
 		List<Tmio1Conductore> lista =conductorLogic.buscarConductorNombre("Diana");
 		assertNotNull(lista);
 		assertEquals(2,lista.size());
 		
+	}
+
+	/**
+	 * Funciona encuentra 1 Jesus para el crearTest1
+	 */
+	@Test
+	public void buscarPorNombreTest2() {
+
+		assertNotNull(conductorLogic);
+		
+		List<Tmio1Conductore> lista =conductorLogic.buscarConductorNombre("Jesus");
+		assertNotNull(lista);
+		assertEquals(1,lista.size());
+		
+		
+	}
+	
+	/**
+	 * Funciona, no encuentra a Peter para el crearTest1
+	 */
+	@Test
+	public void buscarPorNombreTest3() {
+		assertNotNull(conductorLogic);
+		
+		List<Tmio1Conductore> lista =conductorLogic.buscarConductorNombre("Peter");
+		assertEquals(0,lista.size());
+		
+	}
+	
+	/**
+	 * Funciona, no encuentra a --- para el crearTest1
+	 */
+	@Test
+	public void buscarPorNombreTest4() {
+		assertNotNull(conductorLogic);
+		
+		List<Tmio1Conductore> lista =conductorLogic.buscarConductorNombre("---");
+		assertEquals(0,lista.size());
+		
+	}
+	
+	/**
+	 * Funciona, no encuentra a "" para el crearTest1
+	 */
+	@Test
+	public void buscarPorNombreTest5() {
+		assertNotNull(conductorLogic);
+		
+		List<Tmio1Conductore> lista =conductorLogic.buscarConductorNombre("");
+		assertNull(lista);
 		
 		
 	}
 	
 	
+	////////////////
+	
+	
+	
+	/**
+	 * Funciona, encuentra la cedula "02", "123", "199"
+	 */
 	@Test
-	public void buscarPorCedulaTest() {
+	public void buscarPorCedulaTest1() {
 		
 		assertNotNull(conductorLogic);
 		
@@ -159,6 +243,64 @@ public class TestConductoresLogic {
 	}
 	
 	
+	/**
+	 * Funciona, no busca la cedula "", porque no es válida
+	 */
+	@Test
+	public void buscarPorCedulaTest2() {
+		
+		assertNotNull(conductorLogic);
+		
+		Tmio1Conductore c =conductorLogic.buscarConductorCedula("");
+		assertNull(c);
+		
+		
+	}
+	
+	/**
+	 * Funciona, no busca la cedula "klj", porque no es válida
+	 */
+	@Test
+	public void buscarPorCedulaTest3() {
+		
+		assertNotNull(conductorLogic);
+		
+		Tmio1Conductore c1 =conductorLogic.buscarConductorCedula("kjl");
+		assertNull(c1);
+		
+	}
+	
+	/**
+	 * Funciona, no encuentra la cedula "1456", porque no creó en la base de datos
+	 */
+	@Test
+	public void buscarPorCedulaTest4() {
+		
+		assertNotNull(conductorLogic);
+		
+		Tmio1Conductore c =conductorLogic.buscarConductorCedula("1456");
+		assertNull(c);
+	
+	}
+	
+	/**
+	 * Funciona, no busca la cedula "45f87exaDD", porque no es válida
+	 */
+	@Test
+	public void buscarPorCedulaTest5() {
+		
+		assertNotNull(conductorLogic);
+		
+		Tmio1Conductore c =conductorLogic.buscarConductorCedula("45f87exaDD");
+		assertNull(c);
+		
+		
+	}
+
+	////////////////////////////
+	
+	
+	
 	@Test
 	public void buscarPorApellidoTest() {
 //		setupEscenario1();
@@ -174,30 +316,28 @@ public class TestConductoresLogic {
 		assertEquals(1,lista2.size());
 		
 	}
-
-	
-	@Test
-	@After
-	public void borrarTest() {
-//		setupEscenario1();
-
-		
-		assertNotNull(conductorLogic);
+//
+//	
+//	@Test
+//	@After
+//	public void borrarTest() {
 //		
-//		assertTrue(conductorLogic.borrarConductor(conductorLogic.buscarConductorCedula("15")));
-//		assertNull(conductorLogic.buscarConductorCedula("15"));
+//		assertNotNull(conductorLogic);
+////		
+////		assertTrue(conductorLogic.borrarConductor(conductorLogic.buscarConductorCedula("15")));
+////		assertNull(conductorLogic.buscarConductorCedula("15"));
+////		assertTrue(conductorLogic.borrarConductor(conductorLogic.buscarConductorCedula("123")));
+////		assertNull(conductorLogic.buscarConductorCedula("123"));
+//		
+//
+//		assertTrue(conductorLogic.borrarConductor(conductorLogic.buscarConductorCedula("01")));
+//		assertTrue(conductorLogic.borrarConductor(conductorLogic.buscarConductorCedula("02")));
+//		assertTrue(conductorLogic.borrarConductor(conductorLogic.buscarConductorCedula("06")));
+//		assertTrue(conductorLogic.borrarConductor(conductorLogic.buscarConductorCedula("10")));
 //		assertTrue(conductorLogic.borrarConductor(conductorLogic.buscarConductorCedula("123")));
-//		assertNull(conductorLogic.buscarConductorCedula("123"));
-		
-
-		assertTrue(conductorLogic.borrarConductor(conductorLogic.buscarConductorCedula("01")));
-		assertTrue(conductorLogic.borrarConductor(conductorLogic.buscarConductorCedula("02")));
-		assertTrue(conductorLogic.borrarConductor(conductorLogic.buscarConductorCedula("06")));
-		assertTrue(conductorLogic.borrarConductor(conductorLogic.buscarConductorCedula("10")));
-		assertTrue(conductorLogic.borrarConductor(conductorLogic.buscarConductorCedula("123")));
-		assertTrue(conductorLogic.borrarConductor(conductorLogic.buscarConductorCedula("15")));
-				
-	}
+//		assertTrue(conductorLogic.borrarConductor(conductorLogic.buscarConductorCedula("15")));
+//				
+//	}
 	
 //	@Test
 //	public void actualizarTest() {
