@@ -300,10 +300,11 @@ public class TestConductoresLogic {
 	////////////////////////////
 	
 	
-	
+	/**
+	 * Funciona, encuentra los apellidos "Tamura" y "Clinton"
+	 */
 	@Test
-	public void buscarPorApellidoTest() {
-//		setupEscenario1();
+	public void buscarPorApellidoTest1() {
 		
 		assertNotNull(conductorLogic);
 		
@@ -316,6 +317,81 @@ public class TestConductoresLogic {
 		assertEquals(1,lista2.size());
 		
 	}
+	
+	
+	/**
+	 * Funciona, no encuentra los apellidos "Fernandez" y "Moreno"
+	 */
+	@Test
+	public void buscarPorApellidoTest2() {
+		
+		assertNotNull(conductorLogic);
+		
+		List<Tmio1Conductore> lista =conductorLogic.buscarConductorApellido("Fernandez");
+		assertEquals(0,lista.size());
+		
+		
+		List<Tmio1Conductore> lista2 =conductorLogic.buscarConductorApellido("Moreno");
+		assertEquals(0,lista2.size());
+		
+		
+	}
+	
+	/**
+	 * Funciona, no encuentra los apellidos "" .
+	 */
+	@Test
+	public void buscarPorApellidoTest3() {
+		
+		assertNotNull(conductorLogic);
+		
+		List<Tmio1Conductore> lista =conductorLogic.buscarConductorApellido("");
+		assertNull(lista);
+		
+	}
+	
+	/**
+	 * Funciona, no encuentra los apellidos "12jjf" porque no son válidos
+	 */
+	@Test
+	public void buscarPorApellidoTest4() {
+		
+		assertNotNull(conductorLogic);
+		
+		List<Tmio1Conductore> lista =conductorLogic.buscarConductorApellido("12jjf");
+		assertEquals(0,lista.size());
+		
+	}
+	
+	/**
+	 * Funciona, no encuentra los apellidos "di" ni "hw" 
+	 * por que tienen menos de tres caracteres
+	 * por tanto no se guardaron
+	 */
+	@Test
+	public void buscarPorApellidoTest5() {
+		
+		assertNotNull(conductorLogic);
+		
+		List<Tmio1Conductore> lista =conductorLogic.buscarConductorApellido("di");
+		assertEquals(0,lista.size());
+		
+		List<Tmio1Conductore> lista2 =conductorLogic.buscarConductorApellido("hw");
+		assertEquals(0,lista2.size());
+		
+	}
+	
+	////////////ACTUALIZAR TEST
+	
+//	@Test
+//	public void actualizarTest() {
+//		setupEscenario1();
+//		
+//		
+//	}
+	
+	
+	///////////////BORRAR TEST
 //
 //	
 //	@Test
@@ -339,10 +415,5 @@ public class TestConductoresLogic {
 //				
 //	}
 	
-//	@Test
-//	public void actualizarTest() {
-//		setupEscenario1();
-//		
-//		
-//	}
+
 }
