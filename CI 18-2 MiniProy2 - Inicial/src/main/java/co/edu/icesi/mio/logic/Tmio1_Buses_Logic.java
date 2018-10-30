@@ -41,9 +41,9 @@ public class Tmio1_Buses_Logic implements IBusesLogic {
 		 */
 		boolean ret=false;
 		// valida la placa
-		if(!bus.getPlaca().equals("") && bus.getPlaca()!=null && bus.getPlaca().length()==6) {
+		if(bus.getPlaca()!=null && !bus.getPlaca().equals("")  && bus.getPlaca().length()==6) {
 			// valida la marca
-			if(!bus.getMarca().equals("") && bus.getMarca()!=null && bus.getMarca().length()>=3) {
+			if(bus.getMarca()!=null&&!bus.getMarca().equals("")  && bus.getMarca().length()>=3) {
 				// valida el modelo
 				if(bus.getModelo()!=null && bus.getModelo().compareTo(new BigDecimal(1000))>=0 ) {
 					// valida el tipo

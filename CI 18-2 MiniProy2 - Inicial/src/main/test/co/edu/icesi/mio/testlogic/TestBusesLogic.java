@@ -30,10 +30,13 @@ public class TestBusesLogic {
 	}
 	
 
+	/*
+	 * falla, por eso esta comentado
+	 */
 	
 //	@Test
 //	@Before
-	public void crearTest() {
+	public void crearTest1() {
 		
 	
 		assertNotNull(busesLogic);
@@ -89,6 +92,184 @@ public class TestBusesLogic {
 		assertTrue(busesLogic.crearBus(bus2));
 		assertTrue(busesLogic.crearBus(bus3));
 		
+	}
+	/*
+	 * Prueba con placa = null, "", diferente a 6 por lo tanto funciona mal
+	 */
+//	@Test
+	public void crearTest2() {
+		assertNotNull(busesLogic);
+		
+		
+		Tmio1Bus bus = new Tmio1Bus();
+		
+		bus.setCapacidad(new BigDecimal(2000));
+		bus.setMarca("Renault");
+		bus.setModelo(new BigDecimal(2015));
+		bus.setPlaca(null);
+		bus.setTipo("T");
+		bus.setTmio1Servicios(new ArrayList<Tmio1Servicio>());
+		bus.setTmio1ServiciosSitios(new ArrayList<Tmio1ServiciosSitio>());
+		
+		Tmio1Bus bus1 = new Tmio1Bus();
+		
+		bus1.setCapacidad(new BigDecimal(2000));
+		bus1.setMarca("Renault");
+		bus1.setModelo(new BigDecimal(2015));
+		bus1.setPlaca("");
+		bus1.setTipo("T");
+		bus1.setTmio1Servicios(new ArrayList<Tmio1Servicio>());
+		bus1.setTmio1ServiciosSitios(new ArrayList<Tmio1ServiciosSitio>());
+		
+		Tmio1Bus bus2 = new Tmio1Bus();
+		
+		bus2.setCapacidad(new BigDecimal(2000));
+		bus2.setMarca("Renault");
+		bus2.setModelo(new BigDecimal(2015));
+		bus2.setPlaca("ASD2");
+		bus2.setTipo("T");
+		bus2.setTmio1Servicios(new ArrayList<Tmio1Servicio>());
+		bus2.setTmio1ServiciosSitios(new ArrayList<Tmio1ServiciosSitio>());
+
+		assertFalse(busesLogic.crearBus(bus));
+		assertFalse(busesLogic.crearBus(bus1));
+		assertFalse(busesLogic.crearBus(bus2));
+		
+				
+	}
+	/*
+	 * Prueba con marca = null, "", menor a 3, por lo tanto funciona mal
+	 */
+	
+//	@Test
+	public void crearTest3() {
+		assertNotNull(busesLogic);
+		
+		
+		Tmio1Bus bus = new Tmio1Bus();
+		
+		bus.setCapacidad(new BigDecimal(2000));
+		bus.setMarca(null);
+		bus.setModelo(new BigDecimal(2015));
+		bus.setPlaca("ADB132");
+		bus.setTipo("T");
+		bus.setTmio1Servicios(new ArrayList<Tmio1Servicio>());
+		bus.setTmio1ServiciosSitios(new ArrayList<Tmio1ServiciosSitio>());
+		
+		Tmio1Bus bus1 = new Tmio1Bus();
+		
+		bus1.setCapacidad(new BigDecimal(2000));
+		bus1.setMarca("");
+		bus1.setModelo(new BigDecimal(2015));
+		bus1.setPlaca("ADB132");
+		bus1.setTipo("T");
+		bus1.setTmio1Servicios(new ArrayList<Tmio1Servicio>());
+		bus1.setTmio1ServiciosSitios(new ArrayList<Tmio1ServiciosSitio>());
+		
+		Tmio1Bus bus2 = new Tmio1Bus();
+		
+		bus2.setCapacidad(new BigDecimal(2000));
+		bus2.setMarca("R");
+		bus2.setModelo(new BigDecimal(2015));
+		bus2.setPlaca("ADB132");
+		bus2.setTipo("T");
+		bus2.setTmio1Servicios(new ArrayList<Tmio1Servicio>());
+		bus2.setTmio1ServiciosSitios(new ArrayList<Tmio1ServiciosSitio>());
+
+		assertFalse(busesLogic.crearBus(bus));
+		assertFalse(busesLogic.crearBus(bus1));
+		assertFalse(busesLogic.crearBus(bus2));
+				
+	}
+	/*
+	 * Prueba con modelo = null, menor a 1000, por lo tanto funciona mal
+	 */
+	
+//	@Test
+	public void crearTest4() {
+		assertNotNull(busesLogic);
+		
+		
+		Tmio1Bus bus = new Tmio1Bus();
+		
+		bus.setCapacidad(new BigDecimal(2000));
+		bus.setMarca("olsddd");
+		bus.setModelo(null);
+		bus.setPlaca("ADB132");
+		bus.setTipo("T");
+		bus.setTmio1Servicios(new ArrayList<Tmio1Servicio>());
+		bus.setTmio1ServiciosSitios(new ArrayList<Tmio1ServiciosSitio>());
+		
+		Tmio1Bus bus1 = new Tmio1Bus();
+		
+		bus1.setCapacidad(new BigDecimal(2000));
+		bus1.setMarca("olsddd");
+		bus1.setModelo(new BigDecimal(20));
+		bus1.setPlaca("ADB132");
+		bus1.setTipo("T");
+		bus1.setTmio1Servicios(new ArrayList<Tmio1Servicio>());
+		bus1.setTmio1ServiciosSitios(new ArrayList<Tmio1ServiciosSitio>());
+		
+		Tmio1Bus bus2 = new Tmio1Bus();
+		
+		bus2.setCapacidad(new BigDecimal(2000));
+		bus2.setMarca("Rolsddd");
+		bus2.setModelo(new BigDecimal(999));
+		bus2.setPlaca("ADB132");
+		bus2.setTipo("T");
+		bus2.setTmio1Servicios(new ArrayList<Tmio1Servicio>());
+		bus2.setTmio1ServiciosSitios(new ArrayList<Tmio1ServiciosSitio>());
+
+		assertFalse(busesLogic.crearBus(bus));
+		assertFalse(busesLogic.crearBus(bus1));
+		assertFalse(busesLogic.crearBus(bus2));
+
+				
+	}
+	/*
+	 * Prueba con capacidad = null,  menor a 1, por lo tanto funciona mal
+	 */
+	
+//	@Test
+	public void crearTest5() {
+		assertNotNull(busesLogic);
+		
+		
+		Tmio1Bus bus = new Tmio1Bus();
+		
+		bus.setCapacidad(new BigDecimal(0));
+		bus.setMarca("aolslslsl");
+		bus.setModelo(new BigDecimal(2015));
+		bus.setPlaca("ADB132");
+		bus.setTipo("T");
+		bus.setTmio1Servicios(new ArrayList<Tmio1Servicio>());
+		bus.setTmio1ServiciosSitios(new ArrayList<Tmio1ServiciosSitio>());
+		
+		Tmio1Bus bus1 = new Tmio1Bus();
+		
+		bus1.setCapacidad(new BigDecimal(-10000));
+		bus1.setMarca("aslasllsdll");
+		bus1.setModelo(new BigDecimal(2015));
+		bus1.setPlaca("ADB132");
+		bus1.setTipo("T");
+		bus1.setTmio1Servicios(new ArrayList<Tmio1Servicio>());
+		bus1.setTmio1ServiciosSitios(new ArrayList<Tmio1ServiciosSitio>());
+		
+		Tmio1Bus bus2 = new Tmio1Bus();
+		
+		bus2.setCapacidad(new BigDecimal(-0.5));
+		bus2.setMarca("Raafasfsfd");
+		bus2.setModelo(new BigDecimal(2015));
+		bus2.setPlaca("ADB132");
+		bus2.setTipo("T");
+		bus2.setTmio1Servicios(new ArrayList<Tmio1Servicio>());
+		bus2.setTmio1ServiciosSitios(new ArrayList<Tmio1ServiciosSitio>());
+
+		assertFalse(busesLogic.crearBus(bus));
+		assertFalse(busesLogic.crearBus(bus1));
+		assertFalse(busesLogic.crearBus(bus2));
+
+				
 	}
 	
 	/*
@@ -308,9 +489,112 @@ public class TestBusesLogic {
 		assertNull("No se encontro el bus por ese modelo", buses);	
 		
 	}
+	/*
+	 * falla, por eso esta comentado
+	 */
+//	@Test
+	public void actualizarTest1() {
+		assertNotNull(busesLogic);
+		
+	Tmio1Bus bus = new Tmio1Bus();
+		
+		bus.setCapacidad(new BigDecimal(2000));
+		bus.setMarca("Renault");
+		bus.setModelo(new BigDecimal(2015));
+		bus.setPlaca("");
+		bus.setTipo("T");
+		bus.setTmio1Servicios(new ArrayList<Tmio1Servicio>());
+		bus.setTmio1ServiciosSitios(new ArrayList<Tmio1ServiciosSitio>());
+		
 	
+		assertFalse(busesLogic.actualizarBus(bus));
+		
+	}
+	/*
+	 * Prueba con placa = "" por lo tanto funciona mal
+	 */
 	
-	public void actualizarTest() {
+	@Test
+	public void actualizarTest2() {
+		assertNotNull(busesLogic);
+		
+		Tmio1Bus bus = new Tmio1Bus();
+		
+		bus.setCapacidad(new BigDecimal(2000));
+		bus.setMarca("Renault");
+		bus.setModelo(new BigDecimal(2015));
+		bus.setPlaca("");
+		bus.setTipo("T");
+		bus.setTmio1Servicios(new ArrayList<Tmio1Servicio>());
+		bus.setTmio1ServiciosSitios(new ArrayList<Tmio1ServiciosSitio>());
+		
+	
+		assertFalse(busesLogic.actualizarBus(bus));
+		
+	}
+	/*
+	 * Prueba con marca tamaño 2 por lo tanto funciona mal
+	 */
+	@Test
+	public void actualizarTest3() {
+		assertNotNull(busesLogic);
+		
+	Tmio1Bus bus = new Tmio1Bus();
+		
+		bus.setCapacidad(new BigDecimal(2000));
+		bus.setMarca("Re");
+		bus.setModelo(new BigDecimal(2015));
+		bus.setPlaca("ADS134");
+		bus.setTipo("T");
+		bus.setTmio1Servicios(new ArrayList<Tmio1Servicio>());
+		bus.setTmio1ServiciosSitios(new ArrayList<Tmio1ServiciosSitio>());
+		
+	
+		assertFalse(busesLogic.actualizarBus(bus));
+		
+	}
+	
+	/*
+	 * Prueba con tipo = "W" por lo tanto funciona mal
+	 */
+	@Test
+	public void actualizarTest4() {
+		assertNotNull(busesLogic);
+		
+	Tmio1Bus bus = new Tmio1Bus();
+		
+		bus.setCapacidad(new BigDecimal(2000));
+		bus.setMarca("Renault");
+		bus.setModelo(new BigDecimal(2015));
+		bus.setPlaca("ASD123");
+		bus.setTipo("W");
+		bus.setTmio1Servicios(new ArrayList<Tmio1Servicio>());
+		bus.setTmio1ServiciosSitios(new ArrayList<Tmio1ServiciosSitio>());
+		
+	
+		assertFalse(busesLogic.actualizarBus(bus));
+		
+	}
+	
+	/*
+	 * Prueba con capacidad = null, por lo tanto funciona mal
+	 */
+	@Test
+	public void actualizarTest5() {
+		assertNotNull(busesLogic);
+		
+	Tmio1Bus bus = new Tmio1Bus();
+		
+		bus.setCapacidad(null);
+		bus.setMarca("Renault");
+		bus.setModelo(new BigDecimal(2015));
+		bus.setPlaca("ASD132");
+		bus.setTipo("T");
+		bus.setTmio1Servicios(new ArrayList<Tmio1Servicio>());
+		bus.setTmio1ServiciosSitios(new ArrayList<Tmio1ServiciosSitio>());
+		
+	
+		assertFalse(busesLogic.actualizarBus(bus));
 		
 	}
 	
