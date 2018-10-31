@@ -295,7 +295,7 @@ public class TestRutasLogic {
 	
 	
 	@Test
-	public void buscarPorRangoDiasTest() {
+	public void buscarPorRangoDiasTest1() {
 		
 		
 		assertNotNull(rutasLogic);
@@ -306,6 +306,61 @@ public class TestRutasLogic {
 		
 		
 	}
+	
+	/**
+	 * rango de días 0 es inválido 
+	 */
+	@Test
+	public void buscarPorRangoDiasTest2() {
+		
+		
+		assertNotNull(rutasLogic);
+		
+		List<Tmio1Ruta> rutas = rutasLogic.buscarRutaRango(new BigDecimal(0), new BigDecimal(0));
+		assertNull("No existen rutas en este rango de dias", rutas);		
+		
+		
+	}
+	
+//	@Test
+//	public void buscarPorRangoDiasTest3() {
+//		
+//		
+//		assertNotNull(rutasLogic);
+//		
+//		List<Tmio1Ruta> rutas = rutasLogic.buscarRutaRango(new BigDecimal(1), new BigDecimal(7));
+//		assertNotNull("No existen rutas en este rango de dias", rutas);		
+//		assertEquals(4, rutas.size());
+//		
+//		
+//	}
+//	
+//	
+//	@Test
+//	public void buscarPorRangoDiasTest4() {
+//		
+//		
+//		assertNotNull(rutasLogic);
+//		
+//		List<Tmio1Ruta> rutas = rutasLogic.buscarRutaRango(new BigDecimal(1), new BigDecimal(7));
+//		assertNotNull("No existen rutas en este rango de dias", rutas);		
+//		assertEquals(4, rutas.size());
+//		
+//		
+//	}
+//	
+//	@Test
+//	public void buscarPorRangoDiasTest5() {
+//		
+//		
+//		assertNotNull(rutasLogic);
+//		
+//		List<Tmio1Ruta> rutas = rutasLogic.buscarRutaRango(new BigDecimal(1), new BigDecimal(7));
+//		assertNotNull("No existen rutas en este rango de dias", rutas);		
+//		assertEquals(4, rutas.size());
+//		
+//		
+//	}
 	
 	
 //	@Test
